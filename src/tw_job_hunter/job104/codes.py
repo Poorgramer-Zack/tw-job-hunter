@@ -1,5 +1,5 @@
 """104 地區與職類代碼：中文名稱 -> 代碼。程序內快取，每次啟動重新下載。"""
-from .client import get_json
+from tw_job_hunter.job104.client import get_json
 
 AREA_URL = "https://static.104.com.tw/category-tool/json/Area.json"
 JOBCAT_URL = "https://static.104.com.tw/category-tool/json/JobCat.json"

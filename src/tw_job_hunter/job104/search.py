@@ -1,6 +1,6 @@
 """104 職缺搜尋：使用者選項 -> 104 query；104 JSON -> 精簡職缺清單。參數語意見 design.md 的實測表。"""
-from . import codes
-from .client import Schema104Error, get_json
+from tw_job_hunter.job104 import codes
+from tw_job_hunter.job104.client import Schema104Error, get_json
 
 SEARCH_URL = "https://www.104.com.tw/jobs/search/api/jobs"
 SEARCH_PAGE = "https://www.104.com.tw/jobs/search/"

@@ -4,8 +4,8 @@
 """
 from urllib.parse import quote
 
-from .common import NOTICE, clip
-from .http import SourceError, request
+from tw_job_hunter.company.common import NOTICE, clip
+from tw_job_hunter.company.http import SourceError, graphql
 
 SOURCE = "GoodJob"
 URL = "https://api.goodjob.life/graphql"
@@ -64,12 +64,9 @@ def get(tax_id: str, include_reviews: bool = True, review_limit: int = 20) -> di
     variables: dict = {"q": tax_id}
     if include_reviews:
         variables["n"] = review_limit
-    payload = request(SOURCE, "POST", URL, json={"query": _query(include_reviews), "variables": variables}, headers=HEADERS)
-    if not isinstance(payload, dict) or payload.get("errors"):
-        raise SourceError("schema", f"GoodJob 回應含錯誤或格式不符：{str((payload or {}).get('errors'))[:200]}")
-    companies = ((payload.get("data") or {}).get("search_companies"))
+    companies = graphql(SOURCE, URL, _query(include_reviews), variables, "search_companies", HEADERS)
     if companies is None:
-        raise SourceError("schema", "GoodJob 回應缺少 search_companies，格式可能已改變")
+        raise SourceError("schema", "GoodJob 的 search_companies 為空，格式可能已改變")
     # 查無統編時 GoodJob 會回使用者亂填的假公司，必須用統編再過濾一次
     hits = [c for c in companies if c.get("businessNumber") == tax_id]
     if not hits:

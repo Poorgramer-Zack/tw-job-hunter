@@ -1,8 +1,8 @@
 """104 職缺詳情：網址或代碼 -> 完整職缺內容。"""
 import re
 
-from .client import NotFound104Error, Schema104Error, get_json
-from .search import REMOTE_TYPE
+from tw_job_hunter.job104.client import NotFound104Error, Schema104Error, get_json
+from tw_job_hunter.job104.search import REMOTE_TYPE
 
 DETAIL_URL = "https://www.104.com.tw/job/ajax/content/{code}"
 JOB_PAGE = "https://www.104.com.tw/job/{code}"

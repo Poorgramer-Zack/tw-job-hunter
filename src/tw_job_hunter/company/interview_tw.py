@@ -7,8 +7,8 @@ import json
 import re
 from html.parser import HTMLParser
 
-from .common import short_name
-from .http import SourceError, request
+from tw_job_hunter.company.common import short_name
+from tw_job_hunter.company.http import SourceError, request
 
 SOURCE = "面試趣"
 BASE = "https://interview.tw"

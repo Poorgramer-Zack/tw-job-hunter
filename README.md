@@ -129,6 +129,24 @@ claude mcp add tw-job-hunter -- uv run --directory /path/to/tw-job-hunter tw-job
 
 因此 transport 固定用 `requests`，並集中在 `src/tw_job_hunter/job104/client.py`。若日後連 `requests` 也被擋，只需替換這個檔案（例如改用 Playwright 攔截頁面請求），parser 與工具不用動。
 
+## 專案結構
+
+```
+src/tw_job_hunter/
+  server.py          # MCP server：註冊 3 個工具，錯誤轉成結構化結果
+  job104/            # 104：client（節流、被擋偵測）、codes（地區/職類代碼）、search、detail
+  company/           # 公司研調：research 是入口，各來源一個模組
+    http.py          #   共用 HTTP 層（逾時、錯誤分類、每來源 2 秒間隔）與 graphql helper
+    registry.py      #   經濟部商工登記
+    goodjob.py  qollie.py  interview_tw.py  web.py   # 各口碑來源
+    common.py  links.py                              # 共用小工具、各站連結
+tests/               # 單元測試（fixtures/ 為錄製並去識別化的回應）
+scripts/             # 一次性腳本：錄製 fixture
+.claude-plugin/      # plugin 與本機 marketplace 設定
+```
+
+各來源互相獨立、同時查詢；同一來源的請求由 `company/http.py` 的每來源鎖保證間隔。新增來源只需在 `company/` 加一個模組並在 `research.py` 註冊。
+
 ## 開發
 
 ```

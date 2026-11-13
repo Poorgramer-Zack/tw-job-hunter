@@ -1,7 +1,7 @@
 [project]
 name = "tw-job-hunter"
 version = "0.1.0"
-description = "104 人力銀行職缺搜尋與職缺詳情的本機 MCP server（研究學習用途，非官方）"
+description = "104 職缺搜尋與詳情、公司研調（登記資料與社群口碑）的本機 MCP server（研究學習用途，非官方）"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

@@ -138,3 +138,15 @@ def test_source_error_propagates(fake_http):
     fake_http.add(NAME_API, FakeResponse(status=500, body="x"))
     with pytest.raises(SourceError):
         registry.resolve_name("甲公司")
+
+
+def test_resolve_stops_after_exact_match_in_first_spelling(fake_http):
+    fake_http.add(NAME_API, FakeResponse(json_data=[row("22099131", "台灣積體電路製造股份有限公司")]))
+    assert registry.resolve_name("台灣積體電路製造股份有限公司")["tax_id"] == "22099131"
+    assert len(fake_http.calls) == 1  # 已有完全相同的結果，不再查另一種寫法
+
+
+def test_company_tails_shared_with_common():
+    from tw_job_hunter.company import common
+
+    assert set(common.COMPANY_SUFFIXES) <= set(registry.FULL_NAME_TAILS) and "公司" in registry.FULL_NAME_TAILS

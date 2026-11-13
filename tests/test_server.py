@@ -1,5 +1,7 @@
 import asyncio
 
+import pytest
+
 from conftest import FakeResponse, load
 from tw_job_hunter import server
 
@@ -32,6 +34,23 @@ def test_company_research_passes_options_and_env_key(monkeypatch):
     monkeypatch.setenv("TAVILY_API_KEY", "tvly-env")
     assert server.company_research("台積電", include_reviews=False, review_limit=5) == {"ok": True}
     assert seen == {"query": "台積電", "include_reviews": False, "review_limit": 5, "tavily_key": "tvly-env"}
+
+
+@pytest.mark.parametrize("raw", ["", "   ", "${user_config.tavily_api_key}", "${TAVILY_API_KEY}"])
+def test_unusable_env_key_becomes_none(monkeypatch, raw):
+    seen = {}
+    monkeypatch.setattr(server.research, "run", lambda query, include_reviews, review_limit, tavily_key: seen.update(k=tavily_key) or {})
+    monkeypatch.setenv("TAVILY_API_KEY", raw)
+    server.company_research("22099131")
+    assert seen["k"] is None
+
+
+def test_env_key_is_stripped(monkeypatch):
+    seen = {}
+    monkeypatch.setattr(server.research, "run", lambda query, include_reviews, review_limit, tavily_key: seen.update(k=tavily_key) or {})
+    monkeypatch.setenv("TAVILY_API_KEY", "  tvly-x  ")
+    server.company_research("22099131")
+    assert seen["k"] == "tvly-x"
 
 
 def test_company_research_without_env_key(monkeypatch):

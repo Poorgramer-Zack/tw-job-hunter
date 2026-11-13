@@ -5,8 +5,8 @@
 """
 from datetime import datetime, timezone
 
-from .common import NOTICE, clip, short_name
-from .http import SourceError, request
+from tw_job_hunter.company.common import NOTICE, clip, short_name
+from tw_job_hunter.company.http import graphql
 
 SOURCE = "天眼通"
 URL = "https://www.qollie.com/graphql"
@@ -23,10 +23,7 @@ COMMENTS = f"query Q($id:ID!){{ searchComments(query:{{companyId:$id,limit:{FETC
 
 
 def _gql(query: str, variables: dict, key: str):
-    payload = request(SOURCE, "POST", URL, json={"query": query, "variables": variables}, headers=HEADERS)
-    if not isinstance(payload, dict) or payload.get("errors") or not isinstance(payload.get("data"), dict) or key not in payload["data"]:
-        raise SourceError("schema", f"天眼通回應含錯誤或缺少 {key}，格式可能已改變")
-    return payload["data"][key]
+    return graphql(SOURCE, URL, query, variables, key, HEADERS)
 
 
 def _date(ms) -> str | None:

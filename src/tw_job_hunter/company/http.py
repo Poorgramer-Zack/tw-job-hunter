@@ -18,12 +18,15 @@ class SourceError(Exception):
         self.type = type_
 
 
-_lock = threading.Lock()
+_locks_guard = threading.Lock()
+_locks: dict[str, threading.Lock] = {}
 _last: dict[str, float] = {}
 
 
 def _throttle(source: str) -> None:
-    with _lock:  # 持鎖 sleep：並發呼叫也依序間隔
+    with _locks_guard:
+        lock = _locks.setdefault(source, threading.Lock())
+    with lock:  # 每個來源一把鎖：同來源依序間隔，不同來源可同時進行
         wait = MIN_INTERVAL - (time.monotonic() - _last.get(source, float("-inf")))
         if wait > 0:
             time.sleep(wait)
@@ -61,3 +64,12 @@ def request(
         return r.json()
     except ValueError as e:
         raise SourceError("schema", f"{source} 回應不是有效的 JSON，格式可能已改變") from e
+
+
+def graphql(source: str, url: str, query: str, variables: dict, key: str, headers: dict | None = None) -> Any:
+    """送出 GraphQL 查詢並回傳 data[key]。這類站的錯誤常包在 HTTP 200 裡，所以要檢查 errors 與 key。"""
+    payload = request(source, "POST", url, json={"query": query, "variables": variables}, headers=headers)
+    data = payload.get("data") if isinstance(payload, dict) else None
+    if not isinstance(payload, dict) or payload.get("errors") or not isinstance(data, dict) or key not in data:
+        raise SourceError("schema", f"{source} 回應含錯誤或缺少 {key}，格式可能已改變")
+    return data[key]

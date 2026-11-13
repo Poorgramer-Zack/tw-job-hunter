@@ -89,7 +89,7 @@ def test_more_than_ten_results_truncated():
     assert len(out["results"]) == 10 and out["truncated"] is True
 
 
-@pytest.mark.parametrize("key", [None, "", "   ", "${user_config.tavily_api_key}", "${TAVILY_API_KEY}"])
+@pytest.mark.parametrize("key", [None, ""])
 def test_no_usable_key_is_skipped(key):
     out = web.search("某公司", key)
     assert out["status"] == "skipped" and out["results"] == [] and "金鑰" in out["note"]

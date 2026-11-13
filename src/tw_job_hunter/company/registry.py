@@ -2,7 +2,8 @@
 import re
 from datetime import date
 
-from .http import request
+from tw_job_hunter.company.common import COMPANY_SUFFIXES
+from tw_job_hunter.company.http import request
 
 SOURCE = "經濟部商工 API"
 BASE = "https://data.gcis.nat.gov.tw/od/data/api/"
@@ -10,7 +11,7 @@ TAXID_API = "5F64D864-61CB-4D0D-8AD9-492047CC1EA6"  # 公司登記基本資料-�
 NAME_API = "6BBA2268-1367-4B42-9CCA-BC17499EBE8C"  # 公司名稱查詢（Company_Status 必填，缺漏會得到空 body）
 STATUS_APPROVED = "01"  # 核准設立
 MAX_CANDIDATES = 10
-COMPANY_SUFFIXES = ("股份有限公司", "有限公司", "有限責任公司", "無限公司", "兩合公司", "公司")
+FULL_NAME_TAILS = (*COMPANY_SUFFIXES, "公司")
 
 
 def _query(api_id: str, flt: str) -> list[dict]:
@@ -62,7 +63,7 @@ def _norm(s: str) -> str:
 
 def _is_full_name(query: str, company: str) -> bool:
     """公司名稱 = 查詢字串 + 標準公司詞尾，才算「簡稱後接詞尾」；「台積電機有限公司」不算「台積電」的全名。"""
-    return company.startswith(query) and company[len(query):] in COMPANY_SUFFIXES
+    return company.startswith(query) and company[len(query):] in FULL_NAME_TAILS
 
 
 def resolve_name(name: str) -> dict:
@@ -71,13 +72,15 @@ def resolve_name(name: str) -> dict:
         raise ValueError("公司名稱不可為空")
     # 官方資料不把「臺」與「台」視為相同，兩種寫法都查再合併
     variants = dict.fromkeys([name, name.replace("臺", "台"), name.replace("台", "臺")])
+    q = _norm(name)
     rows: dict[str, dict] = {}
     for v in variants:
         for r in _query(NAME_API, f"Company_Name like {v} and Company_Status eq {STATUS_APPROVED}"):
             rows.setdefault(r["Business_Accounting_NO"], r)
+        if any(_norm(r["Company_Name"]) == q for r in rows.values()):
+            break  # 已有完全相同的名稱，不必再查另一種寫法
     if not rows:
         return {"status": "not_found", "message": f"查無「{name}」；簡稱請改用公司全名或統編"}
-    q = _norm(name)
     exact = [r for r in rows.values() if _norm(r["Company_Name"]) == q]
     full = [r for r in rows.values() if _is_full_name(q, _norm(r["Company_Name"]))]
     pick = exact[0] if exact else (full[0] if len(full) == 1 else None)

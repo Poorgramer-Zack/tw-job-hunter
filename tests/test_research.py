@@ -1,5 +1,6 @@
 import builtins
 import json
+import threading
 from pathlib import Path
 
 import pytest
@@ -185,3 +186,26 @@ def test_nothing_is_written_to_disk(sources, monkeypatch):
         m.setattr(Path, "write_bytes", lambda *a, **k: (_ for _ in ()).throw(AssertionError("write_bytes")))
         out = research.run(TAX)
     assert json.dumps(out, ensure_ascii=False)
+
+
+def test_review_sources_run_concurrently(sources, monkeypatch):
+    """四個來源互相獨立，應同時送出：若是序列執行，Barrier 會逾時而讓來源變成 error。"""
+    barrier = threading.Barrier(4, timeout=3)
+
+    def meet(result):
+        def fn(*a, **k):
+            barrier.wait()
+            return result
+        return fn
+
+    monkeypatch.setattr(research.goodjob, "get", meet(GOODJOB))
+    monkeypatch.setattr(research.qollie, "get", meet(QOLLIE))
+    monkeypatch.setattr(research.interview_tw, "get", meet(ITW))
+    monkeypatch.setattr(research.web, "search", meet(WEB))
+    out = research.run(TAX)
+    assert [out[k]["status"] for k in ("goodjob", "qollie", "interview_tw", "web")] == ["ok"] * 4
+
+
+def test_result_order_and_keys_are_stable_under_concurrency(sources):
+    out = research.run(TAX)
+    assert list(out) == ["query", "company", "goodjob", "qollie", "interview_tw", "web", "links"]

@@ -1,3 +1,6 @@
+import threading
+import time
+
 import pytest
 import requests
 
@@ -80,3 +83,34 @@ def test_different_sources_do_not_wait(monkeypatch, fake_http):
     http.request("a", "GET", "https://example.com/1")
     http.request("b", "GET", "https://example.com/2")
     assert slept == []
+
+
+def test_sources_throttle_independently(monkeypatch, fake_http):
+    """來源 a 在節流 sleep 時，來源 b 不能被擋住（平行查詢的前提）。"""
+    fake_http.add("example.com", FakeResponse(json_data={}))
+    http._last["a"] = time.monotonic()  # 讓 a 必須 sleep
+    started, release = threading.Event(), threading.Event()
+    monkeypatch.setattr(http.time, "sleep", lambda s: (started.set(), release.wait(3)))
+    t = threading.Thread(target=http.request, args=("a", "GET", "https://example.com/1"))
+    t.start()
+    assert started.wait(2)
+    t0 = time.perf_counter()
+    http.request("b", "GET", "https://example.com/2")
+    assert time.perf_counter() - t0 < 1.0
+    release.set()
+    t.join(3)
+
+
+# ---------- graphql helper ----------
+def test_graphql_returns_data_key(fake_http):
+    fake_http.add("example.com", FakeResponse(json_data={"data": {"x": [1]}}))
+    assert http.graphql("src", "https://example.com/g", "query{x}", {"a": 1}, "x") == [1]
+    assert fake_http.calls[0]["json"] == {"query": "query{x}", "variables": {"a": 1}}
+
+
+@pytest.mark.parametrize("payload", [{"errors": [{"message": "boom"}]}, {"data": {}}, {"data": None}, ["x"]])
+def test_graphql_errors_or_missing_key_are_schema_errors(fake_http, payload):
+    fake_http.add("example.com", FakeResponse(json_data=payload))
+    with pytest.raises(SourceError) as e:
+        http.graphql("src", "https://example.com/g", "query{x}", {}, "x")
+    assert e.value.type == "schema"

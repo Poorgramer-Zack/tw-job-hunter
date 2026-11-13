@@ -1,7 +1,7 @@
 """各站連結，純字串組合，不發出任何請求。已知公司 id 時給公司頁，否則給搜尋連結。"""
 from urllib.parse import quote
 
-from .common import short_name
+from tw_job_hunter.company.common import short_name
 
 
 def build(name: str, goodjob_name: str | None = None, qollie_id: str | None = None, itw_short_id: str | None = None) -> dict:
