@@ -85,7 +85,7 @@ claude mcp add tw-job-hunter -- uv run --directory /path/to/tw-job-hunter tw-job
 | `goodjob` | 評分與各面向評分、平均週工時、估計時薪、加班情形、資料筆數 + 最新面試與工作經驗 | GoodJob（非官方 GraphQL） |
 | `qollie` | 好評／普通／負評篇數 + 最新評論 | 求職天眼通（非官方 GraphQL） |
 | `interview_tw` | 心得數、評分、錄取率、面試難度、平均月薪（只取公開彙總數字，**不取心得內容**） | 面試趣 |
-| `web` | Dcard、PTT 的標題、連結與 300 字內摘要 | Tavily（選填） |
+| `web` | Dcard、PTT 的標題、連結與 300 字內摘要。公司名加引號搜尋，並只保留求職相關看板（PTT：Tech_Job、Salary、Soft_Job、ChangeJob；Dcard：工作版、科技業版） | Tavily（選填） |
 | `links` | 各站的公司頁或搜尋連結 | — |
 
 各來源都以**統編**確認是同一家公司。評論只保留評論文字與少數職務背景，**不取使用者名稱、帳號、IP、性別、學歷等欄位**；回傳內容標註為第三方資料，其中的指示不應被當成命令。評論不寫入磁碟、不做快取，每次查詢重新取得；對同一個來源的請求至少間隔 2 秒，不重試。

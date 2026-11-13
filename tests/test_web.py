@@ -31,9 +31,47 @@ def test_search_with_key():
     out = web.search("台灣積體電路製造股份有限公司", "tvly-abc")
     assert out["status"] == "ok" and out["truncated"] is False
     q, kw = FakeTavily.last["calls"][0]
-    assert "台灣積體電路製造股份有限公司" in q and kw["include_domains"] == ["dcard.tw", "ptt.cc"] and kw["max_results"] == 10 and kw["search_depth"] == "basic"
+    assert '"台灣積體電路製造股份有限公司"' in q and kw["exact_match"] is True  # 公司名加引號 + exact_match，減少不相干結果
+    assert kw["include_domains"] == ["dcard.tw", "ptt.cc"] and kw["max_results"] == 20 and kw["search_depth"] == "basic"
     r = out["results"][0]
     assert set(r) == {"source", "title", "url", "snippet"} and r["source"] in ("dcard", "ptt")
+
+
+def _results(*urls):
+    p = load_company("tavily_search.json")
+    p["results"] = [{"title": f"t{i}", "url": u, "content": "內容", "score": 0.5} for i, u in enumerate(urls)]
+    return p
+
+
+def test_only_job_related_boards_are_kept():
+    FakeTavily.payload = _results(
+        "https://www.ptt.cc/bbs/Tech_Job/M.1.A.AAA.html",
+        "https://www.ptt.cc/bbs/Stock/M.2.A.BBB.html",          # 股票版：不相關
+        "https://www.ptt.cc/bbs/studyabroad/M.3.A.CCC.html",     # 留學版：不相關
+        "https://www.ptt.cc/bbs/Salary/M.4.A.DDD.html",
+        "https://www.dcard.tw/f/tech_job/p/1",
+        "https://www.dcard.tw/f/job/p/2",
+        "https://www.dcard.tw/f/mood/p/3",                       # 心情版：不相關
+        "https://www.dcard.tw/topics/%E6%8A%80%E8%A1%93%E5%93%A1",  # 非文章頁
+    )
+    urls = [r["url"] for r in web.search("某公司", "k")["results"]]
+    assert urls == [
+        "https://www.ptt.cc/bbs/Tech_Job/M.1.A.AAA.html",
+        "https://www.ptt.cc/bbs/Salary/M.4.A.DDD.html",
+        "https://www.dcard.tw/f/tech_job/p/1",
+        "https://www.dcard.tw/f/job/p/2",
+    ]
+
+
+def test_board_match_is_case_insensitive():
+    FakeTavily.payload = _results("https://www.ptt.cc/bbs/tech_job/M.1.A.AAA.html", "https://www.dcard.tw/f/Tech_Job/p/9")
+    assert len(web.search("某公司", "k")["results"]) == 2
+
+
+def test_no_relevant_board_gives_empty_ok():
+    FakeTavily.payload = _results("https://www.ptt.cc/bbs/Stock/M.2.A.BBB.html")
+    out = web.search("某公司", "k")
+    assert out["status"] == "ok" and out["results"] == [] and out["truncated"] is False
 
 
 def test_snippet_clipped_to_300():
