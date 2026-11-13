@@ -1,0 +1,33 @@
+{
+ "data": {
+  "searchComments": [
+   {
+    "_id": "ql0000000000000000000000",
+    "content": "假評論內容 content 0。這是測試用的文字。",
+    "pros": null,
+    "cons": null,
+    "judge": "normal",
+    "category": "question",
+    "createdAt": 1625202662412
+   },
+   {
+    "_id": "ql0000000000000000000001",
+    "content": "假評論內容 content 1。這是測試用的文字。",
+    "pros": null,
+    "cons": null,
+    "judge": "normal",
+    "category": "chat",
+    "createdAt": 1506390774476
+   },
+   {
+    "_id": "ql0000000000000000000002",
+    "content": null,
+    "pros": "假評論內容 pros 2。這是測試用的文字。",
+    "cons": "假評論內容 cons 2。這是測試用的文字。",
+    "judge": "normal",
+    "category": "experienced",
+    "createdAt": 1724674518299
+   }
+  ]
+ }
+}

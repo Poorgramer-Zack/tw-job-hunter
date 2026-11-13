@@ -9,3 +9,4 @@ reports/
 research_notes/
 openspec/
 .claude/
+.venv-dev/

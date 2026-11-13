@@ -1,11 +1,21 @@
 {
   "name": "tw-job-hunter",
-  "version": "0.1.0",
-  "description": "104 人力銀行職缺搜尋與職缺詳情的本機 MCP server（研究學習用途，非官方）",
+  "version": "0.2.0",
+  "description": "104 職缺搜尋與詳情、公司研調（登記資料與社群口碑）的本機 MCP server（研究學習用途，非官方）",
+  "userConfig": {
+    "tavily_api_key": {
+      "type": "string",
+      "title": "Tavily API Key",
+      "description": "選填。用於搜尋 Dcard 與 PTT 的討論；沒填則只回傳搜尋連結。免費金鑰：https://app.tavily.com",
+      "sensitive": true,
+      "default": ""
+    }
+  },
   "mcpServers": {
     "tw-job-hunter": {
       "command": "uv",
-      "args": ["run", "--directory", "${CLAUDE_PLUGIN_ROOT}", "tw-job-hunter"]
+      "args": ["run", "--directory", "${CLAUDE_PLUGIN_ROOT}", "tw-job-hunter"],
+      "env": { "TAVILY_API_KEY": "${user_config.tavily_api_key}" }
     }
   }
 }

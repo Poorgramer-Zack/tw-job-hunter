@@ -1,0 +1,31 @@
+{
+ "query": "台灣積體電路製造 面試 薪水 評價",
+ "follow_up_questions": null,
+ "results": [
+  {
+   "url": "https://www.dcard.tw/f/tech_job/p/258940988",
+   "title": "假標題 0",
+   "content": "假摘要 0。這是測試用的文字。假摘要 0。這是測試用的文字。假摘要 0。這是測試用的文字。假摘要 0。這是測試用的文字。假摘要 0。這是測試用的文字。",
+   "score": 0.45432082,
+   "raw_content": null,
+   "id": "1e9c38-00"
+  },
+  {
+   "url": "https://www.ptt.cc/bbs/studyabroad/M.0.A.FAKE1.html",
+   "title": "假標題 1",
+   "content": "假摘要 1。這是測試用的文字。假摘要 1。這是測試用的文字。假摘要 1。這是測試用的文字。假摘要 1。這是測試用的文字。假摘要 1。這是測試用的文字。",
+   "score": 0.37307608,
+   "raw_content": null,
+   "id": "d0c0da-01"
+  },
+  {
+   "url": "https://www.dcard.tw/topics/%E6%8A%80%E8%A1%93%E5%93%A1",
+   "title": "假標題 2",
+   "content": "假摘要 2。這是測試用的文字。假摘要 2。這是測試用的文字。假摘要 2。這是測試用的文字。假摘要 2。這是測試用的文字。假摘要 2。這是測試用的文字。",
+   "score": 0.36738375,
+   "raw_content": null,
+   "id": "17e704-02"
+  }
+ ],
+ "response_time": 1.97
+}

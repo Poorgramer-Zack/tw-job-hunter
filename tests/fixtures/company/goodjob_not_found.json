@@ -1,0 +1,80 @@
+{
+ "data": {
+  "search_companies": [
+   {
+    "id": "6a37dd3d27bb49753c99ce63",
+    "name": "00000000",
+    "businessNumber": null,
+    "dataCount": 0,
+    "experienceCount": 0,
+    "salaryWorkTimeCount": 0,
+    "policyReviewCount": 0,
+    "salary_work_time_statistics": {
+     "count": 0,
+     "average_week_work_time": null,
+     "average_estimated_hourly_wage": null,
+     "overtime_frequency_count": {
+      "seldom": 0,
+      "sometimes": 0,
+      "usually": 0,
+      "almost_everyday": 0
+     },
+     "has_overtime_salary_count": null,
+     "is_overtime_salary_legal_count": null,
+     "has_compensatory_dayoff_count": null,
+     "job_average_salaries": []
+    },
+    "companyRatingStatistics": null,
+    "companyAspectRatingStatistics": [],
+    "topNJobTitles": {
+     "all": []
+    },
+    "interviewExperiencesResult": {
+     "count": 0,
+     "interviewExperiences": []
+    },
+    "workExperiencesResult": {
+     "count": 0,
+     "workExperiences": []
+    }
+   },
+   {
+    "id": "6a23bb1827bb49753c589040",
+    "name": "0000000000000",
+    "businessNumber": null,
+    "dataCount": 0,
+    "experienceCount": 0,
+    "salaryWorkTimeCount": 0,
+    "policyReviewCount": 0,
+    "salary_work_time_statistics": {
+     "count": 0,
+     "average_week_work_time": null,
+     "average_estimated_hourly_wage": null,
+     "overtime_frequency_count": {
+      "seldom": 0,
+      "sometimes": 0,
+      "usually": 0,
+      "almost_everyday": 0
+     },
+     "has_overtime_salary_count": null,
+     "is_overtime_salary_legal_count": null,
+     "has_compensatory_dayoff_count": null,
+     "job_average_salaries": []
+    },
+    "companyRatingStatistics": null,
+    "companyAspectRatingStatistics": [],
+    "topNJobTitles": {
+     "all": []
+    },
+    "interviewExperiencesResult": {
+     "count": 0,
+     "interviewExperiences": []
+    },
+    "workExperiencesResult": {
+     "count": 0,
+     "workExperiences": []
+    }
+   }
+  ]
+ }
+}

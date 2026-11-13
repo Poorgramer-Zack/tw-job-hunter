@@ -1,0 +1,13 @@
+{
+ "data": {
+  "getCompanyStat": {
+   "good": 3,
+   "normal": 14,
+   "bad": 4,
+   "total": 42,
+   "experienced": 21,
+   "question": 5,
+   "chat": 16
+  }
+ }
+}
