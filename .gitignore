@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+dist/
+
+.remember/
+reports/
+research_notes/
+openspec/
+.claude/

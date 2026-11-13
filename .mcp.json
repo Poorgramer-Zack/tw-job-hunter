@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "tw-job-hunter": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "tw-job-hunter"
+      ],
+      "env": {}
+    }
+  }
+}

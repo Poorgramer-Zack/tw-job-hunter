@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "skills": {
+    "python-mcp-server-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "skillPath": "skills/python-mcp-server-generator/SKILL.md",
+      "computedHash": "d8c68d4be087606a25c589700f2a8ce024126b1cf0ba4339fd389409682819ac"
+    },
+    "uv-package-manager": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/python-development/skills/uv-package-manager/SKILL.md",
+      "computedHash": "adecd8faec01ee261801680942c6a97159d73c3ae9f355568cf9426edc61c1c3"
+    }
+  }
+}

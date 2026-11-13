@@ -1,0 +1,11 @@
+{
+  "name": "tw-job-hunter",
+  "version": "0.1.0",
+  "description": "104 人力銀行職缺搜尋與職缺詳情的本機 MCP server（研究學習用途，非官方）",
+  "mcpServers": {
+    "tw-job-hunter": {
+      "command": "uv",
+      "args": ["run", "--directory", "${CLAUDE_PLUGIN_ROOT}", "tw-job-hunter"]
+    }
+  }
+}
