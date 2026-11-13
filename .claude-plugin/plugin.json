@@ -1,7 +1,7 @@
 {
   "name": "tw-job-hunter",
-  "version": "0.2.0",
-  "description": "104 職缺搜尋與詳情、公司研調（登記資料與社群口碑）的本機 MCP server（研究學習用途，非官方）",
+  "version": "0.3.0",
+  "description": "104 職缺搜尋、公司研調、PDF 履歷無損解析、適配度分析，以及履歷調整建議與自薦信擬定 Skills（研究學習用途，非官方）",
   "userConfig": {
     "tavily_api_key": {
       "type": "string",

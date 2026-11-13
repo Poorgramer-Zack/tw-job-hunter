@@ -8,7 +8,13 @@ from tw_job_hunter import server
 
 def test_tools_registered():
     tools = asyncio.run(server.mcp.list_tools())
-    assert {t.name for t in tools} == {"job104_search", "job104_job_detail", "company_research"}
+    assert {t.name for t in tools} == {
+        "job104_search",
+        "job104_job_detail",
+        "company_research",
+        "parse_resume_pdf",
+        "analyze_job_fit",
+    }
 
 
 def test_company_research_description_mentions_limits():

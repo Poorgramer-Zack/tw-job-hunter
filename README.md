@@ -6,11 +6,15 @@
 
 ## 功能
 
-| 工具 | 說明 |
+| 工具 / Skill | 說明 |
 |---|---|
-| `job104_search` | 搜尋職缺，回傳精簡清單（每頁約 20 筆）與分頁資訊 |
-| `job104_job_detail` | 讀取單一職缺的完整內容：JD、薪資、工作條件、應徵條件、福利 |
-| `company_research` | 公司研調：經濟部登記資料 + GoodJob / 天眼通 / 面試趣口碑，只給事實不給評分 |
+| `job104_search` (MCP) | 搜尋職缺，回傳精簡清單（每頁約 20 筆）與分頁資訊 |
+| `job104_job_detail` (MCP) | 讀取單一職缺的完整內容：JD、薪資、工作條件、應徵條件、福利 |
+| `company_research` (MCP) | 公司研調：經濟部登記資料 + GoodJob / 天眼通 / 面試趣口碑，只給事實不給評分 |
+| `parse_resume_pdf` (MCP) | 本機 PDF 履歷無損解析：高保真提取文字、分頁與章節結構，支援中文字元修復 |
+| `analyze_job_fit` (MCP) | 履歷與 104 職缺適配度診斷：硬性門檻核對、優勢契合點與缺漏技能清單 |
+| `resume-advisor` (Skill) | 履歷調整建議：依台灣人資偏好進行 STAR 量化改寫、關鍵字鏡像，杜絕 AI 腔調與中國用語 |
+| `cover-letter` (Skill) | 自薦信擬定：300 字內四段式自然書信，無 `[...]` 標題、直擊職缺痛點且絕不自曝弱點 |
 
 不做：登入、投遞、收藏、應徵者分析。所有請求都不登入、不帶 cookie。
 
@@ -92,6 +96,35 @@ claude mcp add tw-job-hunter -- uv run --directory /path/to/tw-job-hunter tw-job
 
 名稱解析使用官方子字串查詢，「台」與「臺」會兩種都查；簡稱不可靠，一律要求確認。
 
+### `parse_resume_pdf`
+
+| 參數 | 型別 | 說明 |
+|---|---|---|
+| `pdf_path` | str | 本機 PDF 履歷檔案路徑（如 `C:/path/to/resume.pdf`） |
+
+回傳分頁內容、總字元數與啟發式切分之履歷區塊（經歷、技能、專案、學歷等）。
+
+### `analyze_job_fit`
+
+| 參數 | 型別 | 說明 |
+|---|---|---|
+| `resume_pdf_path` | str | 本機 PDF 履歷檔案路徑 |
+| `job_url_or_code` | str | 104 職缺網址或代碼 |
+
+比對求職者學歷、年資、必備工具與技能標籤，產出結構化核對結果與核心優勢事實，拒絕無依據的假精確錄取率。
+
+## 獨立 Skills
+
+### `/resume-advisor` (履歷調整建議)
+- 遵循台灣求職市場原則：5 年以下經驗嚴格遵守 1 頁 A4 原則；嚴禁進度條與星等評分。
+- STAR 量化改寫：`[強動詞] + [對象/規模] + [技術] + [量化成果]`，提供逐條 Before/After 對照。
+- 內建在地化繁體與去 AI 虛詞規則，杜絕「賦能、抓手、視頻、在快速發展的數位時代」等表達。
+
+### `/cover-letter` (自薦信擬定)
+- 300 繁體字以內，30 秒快速閱畢之四段式結構（破題 $\to$ 成果鉤子 $\to$ 職缺痛點對接 $\to$ 禮貌收尾）。
+- **嚴禁中括號標題**：禁止輸出 `[動機]`、`[核心優勢]`、`[...]` 等標籤，段落間僅以空行自然銜接。
+- **嚴格禁止自曝弱點**：未掌握或熟練度不高之技能一律不提，嚴禁出現自我削弱的語句。
+
 ## 錯誤
 
 所有錯誤都以 `{"error": {"type": ..., "message": ...}}` 回傳，不會讓 server 崩潰：
@@ -133,13 +166,20 @@ claude mcp add tw-job-hunter -- uv run --directory /path/to/tw-job-hunter tw-job
 
 ```
 src/tw_job_hunter/
-  server.py          # MCP server：註冊 3 個工具，錯誤轉成結構化結果
+  server.py          # MCP server：註冊 5 個工具，錯誤轉成結構化結果
   job104/            # 104：client（節流、被擋偵測）、codes（地區/職類代碼）、search、detail
   company/           # 公司研調：research 是入口，各來源一個模組
     http.py          #   共用 HTTP 層（逾時、錯誤分類、每來源 2 秒間隔）與 graphql helper
     registry.py      #   經濟部商工登記
     goodjob.py  qollie.py  interview_tw.py  web.py   # 各口碑來源
     common.py  links.py                              # 共用小工具、各站連結
+  resume/            # 履歷與適配度分析
+    parser.py        #   pypdf 本機 PDF 解析與中文字元清洗
+    analyzer.py      #   職缺條件與履歷適配度診斷
+    locale_rules.py  #   speak-human-tw 繁體在地化與去 AI 腔調規則庫
+.claude/skills/      # 獨立 Skills
+  resume-advisor/    #   履歷調整建議 Skill
+  cover-letter/      #   自薦信擬定 Skill
 tests/               # 單元測試（fixtures/ 為錄製並去識別化的回應）
 scripts/             # 一次性腳本：錄製 fixture
 .claude-plugin/      # plugin 與本機 marketplace 設定
