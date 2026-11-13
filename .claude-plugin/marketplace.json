@@ -1,0 +1,11 @@
+{
+  "name": "tw-job-hunter-local",
+  "owner": { "name": "tw-job-hunter" },
+  "plugins": [
+    {
+      "name": "tw-job-hunter",
+      "source": "./",
+      "description": "104 人力銀行職缺搜尋與職缺詳情的本機 MCP server（研究學習用途，非官方）"
+    }
+  ]
+}
