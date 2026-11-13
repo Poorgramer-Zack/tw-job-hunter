@@ -20,26 +20,26 @@
 
 ## 安裝
 
-需要 [uv](https://docs.astral.sh/uv/)（會自動準備 Python 3.11+）。
+需要 Node.js 20 以上（裝了 Claude Code 就有）。plugin 直接執行打包好的 `dist/server.js`，不用安裝依賴，也不用建置。
 
 **方式一：Claude Code plugin（建議）**
 
 ```
 claude plugin marketplace add /path/to/tw-job-hunter
-claude plugin install tw-job-hunter@tw-job-hunter-local
+claude plugin install tw-job-hunter@tw-job-hunter
 ```
 
-在 Claude Code 內用 `/plugin` 安裝時，會跳出表單請你填 **Tavily API Key**（選填，見下）。之後要修改：`/plugin configure tw-job-hunter@tw-job-hunter-local`。在終端機執行 `claude plugin install` 不會跳出表單，需另外執行 `claude plugin configure tw-job-hunter@tw-job-hunter-local`。
+在 Claude Code 內用 `/plugin` 安裝時，會跳出表單請你填 **Tavily API Key**（選填，見下）。之後要修改：`/plugin configure tw-job-hunter@tw-job-hunter`。在終端機執行 `claude plugin install` 不會跳出表單，需另外執行 `claude plugin configure tw-job-hunter@tw-job-hunter`。
 
 **方式二：直接註冊 MCP server**
 
 ```
-claude mcp add tw-job-hunter -- uv run --directory /path/to/tw-job-hunter tw-job-hunter
+claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 ```
 
 這種方式沒有設定表單，要用 Tavily 請自行設定環境變數 `TAVILY_API_KEY`。
 
-安裝後在 Claude 中問「幫我找台北的 Python 遠端職缺」或「幫我查台灣積體電路製造的口碑」即可。
+安裝後在 Claude 中問「幫我找台北的後端遠端職缺」或「幫我查台灣積體電路製造的口碑」即可。
 
 > plugin 的 MCP server 設定異動在**下一個 session** 才會生效；`/reload-plugins` 不會重啟已在執行的 server。
 
@@ -135,6 +135,7 @@ claude mcp add tw-job-hunter -- uv run --directory /path/to/tw-job-hunter tw-job
 | `network` | 逾時、連線失敗或 5xx |
 | `schema` | 104 回應格式可能已改變，需要更新程式 |
 | `invalid_input` | 參數錯誤，訊息會列出允許的值 |
+| `not_found` | 找不到檔案：PDF 路徑打錯或檔案已移動（`parse_resume_pdf`、`analyze_job_fit`） |
 
 ## 條款與風險
 
@@ -156,52 +157,53 @@ claude mcp add tw-job-hunter -- uv run --directory /path/to/tw-job-hunter tw-job
 
 ## 關於端點
 
-這些端點隨時可能改變。目前（2026-11-13）實測：
-- 一般 `requests` 可以取得資料。
-- `httpx` 與 `curl_cffi`（模擬 Chrome 指紋）都會被 Cloudflare 擋下。
+這些端點隨時可能改變。2026-11-13 實測 Node 內建 `fetch` 可以取得 104 搜尋、詳情與代碼表。
 
-因此 transport 固定用 `requests`，並集中在 `src/tw_job_hunter/job104/client.py`。若日後連 `requests` 也被擋，只需替換這個檔案（例如改用 Playwright 攔截頁面請求），parser 與工具不用動。
+Cloudflare 會看 TLS 指紋：舊版用 Python 時，`httpx` 與 `curl_cffi`（模擬 Chrome 指紋）都被擋，只有 `requests` 能過。transport 目前集中在 `src/job104/client.ts`；若日後 `fetch` 也被擋，只需換掉這個檔案（例如用 Playwright 攔截頁面請求），parser 與工具不用動。
 
 ## 專案結構
 
 ```
-src/tw_job_hunter/
-  server.py          # MCP server：註冊 5 個工具，錯誤轉成結構化結果
+src/
+  server.ts          # MCP server：註冊 5 個工具，錯誤轉成結構化結果
   job104/            # 104：client（節流、被擋偵測）、codes（地區/職類代碼）、search、detail
   company/           # 公司研調：research 是入口，各來源一個模組
-    http.py          #   共用 HTTP 層（逾時、錯誤分類、每來源 2 秒間隔）與 graphql helper
-    registry.py      #   經濟部商工登記
-    goodjob.py  qollie.py  interview_tw.py  web.py   # 各口碑來源
-    common.py  links.py                              # 共用小工具、各站連結
+    http.ts          #   共用 HTTP 層（逾時、錯誤分類、每來源 2 秒間隔）與 graphql helper
+    registry.ts      #   經濟部商工登記
+    goodjob.ts  qollie.ts  interview_tw.ts  web.ts   # 各口碑來源
+    common.ts  links.ts                              # 共用小工具、各站連結
   resume/            # 履歷與適配度分析
-    parser.py        #   pypdf 本機 PDF 解析與中文字元清洗
-    analyzer.py      #   職缺條件與履歷適配度診斷
-    locale_rules.py  #   speak-human-tw 繁體在地化與去 AI 腔調規則庫
-.claude/skills/      # 獨立 Skills
+    parser.ts        #   unpdf 本機 PDF 解析與中文字元清洗
+    analyzer.ts      #   職缺條件與履歷適配度診斷
+    locale_rules.ts  #   speak-human-tw 繁體在地化與去 AI 腔調規則庫
+skills/              # 獨立 Skills
   resume-advisor/    #   履歷調整建議 Skill
   cover-letter/      #   自薦信擬定 Skill
-tests/               # 單元測試（fixtures/ 為錄製並去識別化的回應）
+tests/               # vitest 測試（fixtures/ 為錄製並去識別化的回應）
 scripts/             # 一次性腳本：錄製 fixture
+dist/                # 建置產物 server.js，要隨程式碼一起 commit
 .claude-plugin/      # plugin 與本機 marketplace 設定
 ```
 
-各來源互相獨立、同時查詢；同一來源的請求由 `company/http.py` 的每來源鎖保證間隔。新增來源只需在 `company/` 加一個模組並在 `research.py` 註冊。
+各來源互相獨立、同時查詢；同一來源的請求由 `src/company/http.ts` 的每來源 Promise 串列保證間隔。新增來源只需在 `company/` 加一個模組並在 `research.ts` 註冊。
 
 ## 開發
 
 ```
-uv sync
-uv run pytest
+npm install
+npm test                              # vitest，211 個測試
+npm run build                         # tsup，打包成單一 dist/server.js
+./node_modules/.bin/tsc --noEmit      # 型別檢查（Windows PowerShell 用 .\node_modules\.bin\tsc.cmd --noEmit）
 ```
 
-> 若 plugin 的 MCP server 正在執行，它會鎖住 `.venv` 內的可執行檔，`uv sync` 會失敗。開發時請另用一個環境：`UV_PROJECT_ENVIRONMENT=.venv-dev uv run pytest`。
+plugin 安裝時不會跑建置，實際執行的是 repo 裡的 `dist/server.js`。改完 `src/` 後要跑 `npm run build`，並把產生的 `dist/server.js` 一起 commit。`npm run check:dist` 會重新建置再比對 git 差異，忘了更新 `dist/` 就失敗。
 
 測試全部使用 `tests/fixtures/` 內錄製的回應，不會打網路。若來源改版，重新錄製：
 
 ```
-uv run python scripts/record_fixtures.py                    # 104（4 個請求 + 1 個 404 探測）
-uv run python scripts/record_fixtures.py --probe            # 另外實測 104 篩選參數語意
-uv run python scripts/record_company_fixtures.py [gcis|goodjob|qollie|itw|tavily]  # 公司研調各來源
+npx tsx scripts/record-fixtures.ts                    # 104（4 個請求 + 1 個 404 探測）
+npx tsx scripts/record-fixtures.ts --probe            # 另外實測 104 篩選參數語意
+TAVILY_API_KEY=... npx tsx scripts/record-company-fixtures.ts [gcis|goodjob|qollie|itw|tavily]  # 公司研調各來源
 ```
 
 公司研調的 fixture 會自動去識別化（評論與搜尋摘要換成假文字、私人姓名換成假名），因為 fixture 會進公開 repo。
