@@ -1,0 +1,121 @@
+{
+  "payload": {
+    "areas": [
+      {
+        "value": "TPE",
+        "name": "臺北市",
+        "zone": "北部"
+      },
+      {
+        "value": "NWT",
+        "name": "新北市",
+        "zone": "北部"
+      },
+      {
+        "value": "TAO",
+        "name": "桃園市",
+        "zone": "北部"
+      },
+      {
+        "value": "TXG",
+        "name": "臺中市",
+        "zone": "中部"
+      },
+      {
+        "value": "TNN",
+        "name": "臺南市",
+        "zone": "南部"
+      },
+      {
+        "value": "KHH",
+        "name": "高雄市",
+        "zone": "南部"
+      },
+      {
+        "value": "KEE",
+        "name": "基隆市",
+        "zone": "北部"
+      },
+      {
+        "value": "HSZ",
+        "name": "新竹市",
+        "zone": "北部"
+      },
+      {
+        "value": "HSQ",
+        "name": "新竹縣",
+        "zone": "北部"
+      },
+      {
+        "value": "MIA",
+        "name": "苗栗縣",
+        "zone": "中部"
+      },
+      {
+        "value": "YUN",
+        "name": "雲林縣",
+        "zone": "中部"
+      },
+      {
+        "value": "CHA",
+        "name": "彰化縣",
+        "zone": "中部"
+      },
+      {
+        "value": "NAN",
+        "name": "南投縣",
+        "zone": "中部"
+      },
+      {
+        "value": "CYI",
+        "name": "嘉義市",
+        "zone": "南部"
+      },
+      {
+        "value": "CYQ",
+        "name": "嘉義縣",
+        "zone": "南部"
+      },
+      {
+        "value": "ILA",
+        "name": "宜蘭縣",
+        "zone": "北部"
+      },
+      {
+        "value": "HUA",
+        "name": "花蓮縣",
+        "zone": "東部"
+      },
+      {
+        "value": "TTT",
+        "name": "臺東縣",
+        "zone": "東部"
+      },
+      {
+        "value": "PIF",
+        "name": "屏東縣",
+        "zone": "南部"
+      },
+      {
+        "value": "PEN",
+        "name": "澎湖縣",
+        "zone": "海外 / 外島"
+      },
+      {
+        "value": "KIN",
+        "name": "金門縣",
+        "zone": "海外 / 外島"
+      },
+      {
+        "value": "LIE",
+        "name": "連江縣",
+        "zone": "海外 / 外島"
+      },
+      {
+        "value": "oversea",
+        "name": "海外",
+        "zone": "海外 / 外島"
+      }
+    ]
+  }
+}

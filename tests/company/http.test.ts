@@ -63,8 +63,32 @@ describe("company/http", () => {
   ] as const)("test_error_status %i -> %s", async (status, kind) => {
     fakeHttp.add("example.com", new FakeResponse({ status, body: "x" }));
     await expect(http.request("src", "GET", "https://example.com/")).rejects.toSatisfy(
-      (e: unknown) => e instanceof SourceError && e.type === kind && e.message.includes(String(status)),
+      (e: unknown) =>
+        e instanceof SourceError &&
+        e.type === kind &&
+        e.status === status &&
+        e.message.includes(String(status)),
     );
+  });
+
+  it("test_normal_page_with_challenge_platform_script_is_not_blocked", async () => {
+    const html =
+      '<html><head><title>Yourator 職缺</title></head><body><script src="/cdn-cgi/challenge-platform/h/b/scripts/jsd/abc/main.js"></script></body></html>';
+    fakeHttp.add("example.com", new FakeResponse({ status: 200, body: html }));
+    const res = await http.request("src", "GET", "https://example.com/", { expect: "text" });
+    expect(res).toBe(html);
+  });
+
+  it.each([
+    '<html><head><title>Just a moment...</title></head><body><script>window._cf_chl_opt={cvId: "3"};</script></body></html>',
+    "<html><head><title>Just a moment...</title></head><body></body></html>",
+    "<html><head><title>Attention Required! | Cloudflare</title></head><body></body></html>",
+    '<html><body><script>window._cf_chl_opt={cvId: "3"};</script></body></html>',
+  ])("test_cloudflare_challenge_text_is_blocked %s", async (body) => {
+    fakeHttp.add("example.com", new FakeResponse({ status: 200, body }));
+    await expect(
+      http.request("src", "GET", "https://example.com/", { expect: "text" }),
+    ).rejects.toSatisfy((e: unknown) => e instanceof SourceError && e.type === "blocked");
   });
 
   it("test_network_error", async () => {

@@ -10,15 +10,17 @@ import * as research from "./company/research.js";
 import { Job104Error } from "./job104/client.js";
 import * as detail from "./job104/detail.js";
 import * as search from "./job104/search.js";
-import * as analyzer from "./resume/analyzer.js";
 import { FileNotFoundError, extractResumePdf } from "./resume/parser.js";
+import * as youratorDetailModule from "./yourator/detail.js";
+import * as youratorSearchModule from "./yourator/search.js";
 
 export const _deps = {
   search: search.search,
   detail: detail.detail,
+  youratorSearch: youratorSearchModule.youratorSearch,
+  youratorDetail: youratorDetailModule.youratorJobDetail,
   researchRun: research.run,
   extractResumePdf,
-  evaluateJobFit: analyzer.evaluateJobFit,
 };
 
 export interface ToolErrorResult extends Record<string, unknown> {
@@ -120,6 +122,69 @@ export async function job104JobDetail(
   });
 }
 
+const youratorSearchInputSchema = {
+  keyword: z.string(),
+  page: z.number().int().default(1),
+  areas: z.array(z.string()).nullable().default(null),
+  job_categories: z.array(z.string()).nullable().default(null),
+  remote: z.enum(["full", "partial", "any"]).nullable().default(null),
+  salary_min: z.number().int().nullable().default(null),
+  salary_type: z.enum(["monthly", "yearly"]).default("monthly"),
+  job_type: z
+    .enum(["full_time", "part_time", "contract", "temporary", "intern"])
+    .nullable()
+    .default(null),
+  order: z.enum(["relevance", "newest"]).default("relevance"),
+};
+
+export interface YouratorSearchInput {
+  keyword: string;
+  page?: number;
+  areas?: string[] | null;
+  job_categories?: string[] | null;
+  remote?: "full" | "partial" | "any" | null;
+  salary_min?: number | null;
+  salary_type?: "monthly" | "yearly";
+  job_type?: "full_time" | "part_time" | "contract" | "temporary" | "intern" | null;
+  order?: "relevance" | "newest";
+}
+
+export async function youratorSearch(
+  args: YouratorSearchInput,
+): Promise<Record<string, unknown>> {
+  return _safe(async () => {
+    const res = await _deps.youratorSearch({
+      keyword: args.keyword,
+      page: args.page ?? 1,
+      areas: args.areas ?? null,
+      job_categories: args.job_categories ?? null,
+      remote: args.remote ?? null,
+      salary_min: args.salary_min ?? null,
+      salary_type: args.salary_type ?? "monthly",
+      job_type: args.job_type ?? null,
+      order: args.order ?? "relevance",
+    });
+    return res as unknown as Record<string, unknown>;
+  });
+}
+
+const youratorJobDetailInputSchema = {
+  job: z.string(),
+};
+
+export interface YouratorJobDetailInput {
+  job: string;
+}
+
+export async function youratorJobDetail(
+  args: YouratorJobDetailInput,
+): Promise<Record<string, unknown>> {
+  return _safe(async () => {
+    const res = await _deps.youratorDetail(args.job);
+    return res as unknown as Record<string, unknown>;
+  });
+}
+
 const companyResearchInputSchema = {
   company: z.string(),
   include_reviews: z.boolean().default(true),
@@ -162,45 +227,6 @@ export async function parseResumePdf(
   });
 }
 
-const analyzeJobFitInputSchema = {
-  resume_pdf_path: z.string(),
-  job_url_or_code: z.string(),
-};
-
-export interface AnalyzeJobFitInput {
-  resume_pdf_path: string;
-  job_url_or_code: string;
-}
-
-export async function analyzeJobFit(
-  args: AnalyzeJobFitInput,
-): Promise<Record<string, unknown>> {
-  return _safe(async () => {
-    const resumeData = await _deps.extractResumePdf(args.resume_pdf_path);
-    const jobData = await _deps.detail(args.job_url_or_code);
-    if (jobData.status === "not_found") {
-      return {
-        status: "not_found",
-        message: `找不到 104 職缺：${args.job_url_or_code}`,
-      };
-    }
-    const res = _deps.evaluateJobFit(resumeData, {
-      job_code: jobData.job_code,
-      title: jobData.title,
-      company: jobData.company,
-      description: jobData.description ?? undefined,
-      requirements: {
-        education: jobData.requirements.education,
-        experience: jobData.requirements.experience,
-        tools: jobData.requirements.tools.filter((t): t is string => t !== null),
-        skills: jobData.requirements.skills.filter((s): s is string => s !== null),
-        other: jobData.requirements.other,
-      },
-    });
-    return res as unknown as Record<string, unknown>;
-  });
-}
-
 const JOB104_SEARCH_DESCRIPTION = `搜尋 104 人力銀行職缺，回傳精簡清單（每頁約 20 筆）與分頁資訊。完整 JD 請用 job104_job_detail。
 
 - areas：中文地名，可多個，例如 ["台北市", "新北市板橋區"]。
@@ -214,6 +240,21 @@ const JOB104_JOB_DETAIL_DESCRIPTION = `取得單一 104 職缺的完整內容：
 
 job 可以是職缺網址（如 https://www.104.com.tw/job/8u9za）或職缺代碼（如 8u9za）。
 職缺已下架時回傳 status="not_found"。`;
+
+const YOURATOR_SEARCH_DESCRIPTION = `搜尋 Yourator 職缺，回傳精簡清單（每頁 20 筆）與分頁資訊（has_more；Yourator 不提供總筆數）。完整 JD 請用 yourator_job_detail。
+
+- areas：中文地名，可多個，例如 ["台北市", "新北市"]（「台」「臺」通用）。
+- job_categories：中文職類子類名稱，可多個，例如 ["前端工程"]。
+- remote：full=完全遠端、partial=部分遠端、any=兩者皆可；不填則不篩選。注意：這是 Yourator 站方分類（由公司自填），每筆的遠端細節（含面試是否遠端）請讀 yourator_job_detail。
+- salary_min + salary_type：薪資下限（monthly 月薪／yearly 年薪，年薪會換算月薪）。注意：採用薪資「區間重疊」語意（職缺區間與指定下限以上有重疊即符合），並會排除「面議」職缺。
+- job_type：full_time=正職、part_time=副業／兼職、contract=承攬、temporary=約聘、intern=實習。
+- order：relevance=相關度（預設）、newest=最近更新。`;
+
+const YOURATOR_JOB_DETAIL_DESCRIPTION = `取得單一 Yourator 職缺的完整內容：工作內容、條件要求、加分條件、員工福利、薪資、遠端型態（工作 remote_work 與面試 remote_interview 分開回傳）、標籤與公司法定名稱。
+
+- job：職缺網址（如 https://www.yourator.co/companies/{公司}/jobs/{編號}）或職缺路徑（/companies/{公司}/jobs/{編號}）。
+- 職缺不存在或已關閉時回傳 status="not_found"。
+- Yourator 沒有統一編號；若要查詢公司登記與口碑，請將回傳的 company_legal_name 傳給 company_research。`;
 
 const COMPANY_RESEARCH_DESCRIPTION = `公司研調：輸入公司名稱或 8 碼統編，回傳登記資訊與社群口碑的結構化資料（只給事實，不給評分，判讀交給你）。
 
@@ -232,11 +273,6 @@ const PARSE_RESUME_PDF_DESCRIPTION = `無損提取本機 PDF 履歷檔案之文�
 
 - pdf_path：本機 PDF 檔案完整路徑（例如 C:/path/to/resume.pdf）`;
 
-const ANALYZE_JOB_FIT_DESCRIPTION = `比對本機 PDF 履歷與 104 職缺 JD，提供硬性條件核對、優勢契合點與待釐清技能清單。
-
-- resume_pdf_path：本機履歷 PDF 檔案路徑
-- job_url_or_code：104 職缺網址或代碼`;
-
 function toToolResult(data: Record<string, unknown>) {
   return {
     content: [{ type: "text" as const, text: JSON.stringify(data) }],
@@ -247,7 +283,7 @@ function toToolResult(data: Record<string, unknown>) {
 export function createServer(): McpServer {
   const server = new McpServer({
     name: "tw-job-hunter",
-    version: "0.3.0",
+    version: "0.4.0",
   });
 
   server.registerTool(
@@ -269,6 +305,24 @@ export function createServer(): McpServer {
   );
 
   server.registerTool(
+    "yourator_search",
+    {
+      description: YOURATOR_SEARCH_DESCRIPTION,
+      inputSchema: youratorSearchInputSchema,
+    },
+    async (args) => toToolResult(await youratorSearch(args)),
+  );
+
+  server.registerTool(
+    "yourator_job_detail",
+    {
+      description: YOURATOR_JOB_DETAIL_DESCRIPTION,
+      inputSchema: youratorJobDetailInputSchema,
+    },
+    async (args) => toToolResult(await youratorJobDetail(args)),
+  );
+
+  server.registerTool(
     "company_research",
     {
       description: COMPANY_RESEARCH_DESCRIPTION,
@@ -284,15 +338,6 @@ export function createServer(): McpServer {
       inputSchema: parseResumePdfInputSchema,
     },
     async (args) => toToolResult(await parseResumePdf(args)),
-  );
-
-  server.registerTool(
-    "analyze_job_fit",
-    {
-      description: ANALYZE_JOB_FIT_DESCRIPTION,
-      inputSchema: analyzeJobFitInputSchema,
-    },
-    async (args) => toToolResult(await analyzeJobFit(args)),
   );
 
   return server;

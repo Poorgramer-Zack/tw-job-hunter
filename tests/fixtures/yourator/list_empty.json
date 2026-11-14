@@ -1,0 +1,101 @@
+{
+  "payload": {
+    "hasMore": false,
+    "currentPage": 1,
+    "nextPage": null,
+    "recommendedJobs": [
+      {
+        "id": 48281,
+        "name": "商業開發經理 Business Development Manager",
+        "path": "/companies/STR-Network/jobs/48281",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 1763,
+        "tags": [],
+        "company": {
+          "id": 1763,
+          "path": "/companies/STR-Network",
+          "brand": "STR Network 薩泰爾娛樂",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/763/default/684ac70f038bbc6024abc50d2e8fb282c30de891.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/904/medium/642ae337a2584783ea850e85afa6637531180c77.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/904/medium/642ae337a2584783ea850e85afa6637531180c77.png",
+          "canThirdPartyUrl": true,
+          "enName": "STR-Network"
+        },
+        "thirdPartyUrl": "https://strnetwork.teamdoor.io/s/Jh9KQiEG",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48145,
+        "name": "【TW】Senior Software Engineer (CAAC)",
+        "path": "/companies/CrescendoLab/jobs/48145",
+        "salary": "NT$ 1,200,000 - 1,950,000 (年薪)",
+        "lastActiveAt": "一個月前更新",
+        "location": "臺北市",
+        "companyId": 509,
+        "tags": [],
+        "company": {
+          "id": 509,
+          "path": "/companies/CrescendoLab",
+          "brand": "漸強實驗室 Crescendo Lab Ltd.",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/509/default/5d0a77e2c34b879c33de441900fc03a267ab55fb.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/643/medium/3ef04bcf751cd8b442ec9c098cedf17e9e4a9c05.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/643/medium/3ef04bcf751cd8b442ec9c098cedf17e9e4a9c05.png",
+          "canThirdPartyUrl": true,
+          "enName": "CrescendoLab"
+        },
+        "thirdPartyUrl": "https://cresclab.teamdoor.io/s/YbgHaNJ1",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 46506,
+        "name": "SRE工程師(台中)",
+        "path": "/companies/mowaytech/jobs/46506",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一個月內更新",
+        "location": "臺中市",
+        "companyId": 3397,
+        "tags": [
+          "GCP",
+          "SRE",
+          "DevOps / SRE",
+          "GCP/AWS",
+          "雲平台GCP"
+        ],
+        "company": {
+          "id": 3397,
+          "path": "/companies/mowaytech",
+          "brand": "摩維科技-Moway Technology",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/397/default/82772656f5a5f0dfbf5233e33082d75747833d6c.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/748/medium/86fa7d6c68f413dd3c79e3b14fd441012188c7d3.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/748/medium/86fa7d6c68f413dd3c79e3b14fd441012188c7d3.png",
+          "canThirdPartyUrl": false,
+          "enName": "mowaytech"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      }
+    ],
+    "trendingKeywords": [
+      "接案",
+      "大數據",
+      "PM"
+    ],
+    "jobs": []
+  }
+}

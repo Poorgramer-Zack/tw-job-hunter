@@ -1,0 +1,620 @@
+{
+  "payload": {
+    "hasMore": true,
+    "currentPage": 1,
+    "nextPage": 2,
+    "recommendedJobs": [],
+    "trendingKeywords": [],
+    "jobs": [
+      {
+        "id": 39188,
+        "name": "行銷成長夥伴 Marketing Growth Coordinator （可部分遠端）",
+        "path": "/companies/seeds/jobs/39188",
+        "salary": "NT$ 38,000 - 70,000 (月薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 1983,
+        "tags": [
+          "廣告投放",
+          "SEO優化",
+          "品牌行銷企劃",
+          "社群媒體操作"
+        ],
+        "company": {
+          "id": 1983,
+          "path": "/companies/seeds",
+          "brand": "學籽 Seeducation",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/983/default/49fde89c282672f7c2098d3fb285404877b97420.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/126/medium/d87487d861e513648a7d283790d19713e97e377b.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/126/medium/d87487d861e513648a7d283790d19713e97e377b.png",
+          "canThirdPartyUrl": false,
+          "enName": "seeds"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 47339,
+        "name": "Account Manager ",
+        "path": "/companies/flexii/jobs/47339",
+        "salary": "NT$ 60,000 - 80,000 (月薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3405,
+        "tags": [
+          "Account Manager 客戶經理"
+        ],
+        "company": {
+          "id": 3405,
+          "path": "/companies/flexii",
+          "brand": "Flexii | 飛來速科技股份有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/405/default/6b676a32b9bf0684f0e0b716e39db86473c6aaa8.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/762/medium/cbca99c3318a2d4c569bdd657492db95e36facbb.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/762/medium/cbca99c3318a2d4c569bdd657492db95e36facbb.png",
+          "canThirdPartyUrl": false,
+          "enName": "flexii"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48504,
+        "name": "Senior Customer Support Specialist",
+        "path": "/companies/flexii/jobs/48504",
+        "salary": "NT$ 50,000 - 80,000 (月薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3405,
+        "tags": [
+          "customer success"
+        ],
+        "company": {
+          "id": 3405,
+          "path": "/companies/flexii",
+          "brand": "Flexii | 飛來速科技股份有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/405/default/6b676a32b9bf0684f0e0b716e39db86473c6aaa8.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/762/medium/cbca99c3318a2d4c569bdd657492db95e36facbb.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/762/medium/cbca99c3318a2d4c569bdd657492db95e36facbb.png",
+          "canThirdPartyUrl": false,
+          "enName": "flexii"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48999,
+        "name": "Customer Service Manager",
+        "path": "/companies/flexii/jobs/48999",
+        "salary": "NT$ 80,000 - 100,000 (月薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3405,
+        "tags": [],
+        "company": {
+          "id": 3405,
+          "path": "/companies/flexii",
+          "brand": "Flexii | 飛來速科技股份有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/405/default/6b676a32b9bf0684f0e0b716e39db86473c6aaa8.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/762/medium/cbca99c3318a2d4c569bdd657492db95e36facbb.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/762/medium/cbca99c3318a2d4c569bdd657492db95e36facbb.png",
+          "canThirdPartyUrl": false,
+          "enName": "flexii"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48278,
+        "name": "營運助理 Operations Assistant",
+        "path": "/companies/ridefair/jobs/48278",
+        "salary": "NT$ 250 - 280 (時薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "高雄市",
+        "companyId": 3539,
+        "tags": [
+          "新創",
+          "專案執行",
+          "行政庶務",
+          "中英雙語"
+        ],
+        "company": {
+          "id": 3539,
+          "path": "/companies/ridefair",
+          "brand": "RideFair 睿德菲爾有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/539/default/900f8307fd664a81350310d54ae6bdd114df2d44.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/792/medium/9196f5ff9a9bd3fc127bcb1da3cf7340803341c8.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/792/medium/9196f5ff9a9bd3fc127bcb1da3cf7340803341c8.png",
+          "canThirdPartyUrl": false,
+          "enName": "ridefair"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48361,
+        "name": "車隊路線最佳化軟體工程師（Python / OR-Tools / GIS）",
+        "path": "/companies/ridefair/jobs/48361",
+        "salary": "NT$ 85,000 -  (月薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "高雄市",
+        "companyId": 3539,
+        "tags": [],
+        "company": {
+          "id": 3539,
+          "path": "/companies/ridefair",
+          "brand": "RideFair 睿德菲爾有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/539/default/900f8307fd664a81350310d54ae6bdd114df2d44.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/792/medium/9196f5ff9a9bd3fc127bcb1da3cf7340803341c8.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/792/medium/9196f5ff9a9bd3fc127bcb1da3cf7340803341c8.png",
+          "canThirdPartyUrl": false,
+          "enName": "ridefair"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48248,
+        "name": "Product Manager, PicCollage App",
+        "path": "/companies/PicCollage/jobs/48248",
+        "salary": "NT$ 1,600,000 - 2,500,000 (年薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "product management",
+          "B2C",
+          "software",
+          "contractor",
+          "product developement"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/ee655ad7-18dc-456c-815f-6e70d2952531?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 47800,
+        "name": "Senior Android Developer for PicCollage App",
+        "path": "/companies/PicCollage/jobs/47800",
+        "salary": "NT$ 2,100,000 - 3,000,000 (年薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "Android",
+          "Kotlin",
+          "MVVM / RxJava",
+          "Jetpack Compose"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/17d8e0eb-2f4b-4d3a-8958-1835aeee3ed7?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48750,
+        "name": "(Senior) Finance Manager",
+        "path": "/companies/PicCollage/jobs/48750",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "Fluent in English",
+          "Treasury & Cash Flow",
+          "IFRS / US GAAP",
+          "FP&A",
+          "Finance Manager"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/1c2d7855-0e1b-4219-ad12-8420a2dedbdd?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 20659,
+        "name": " 【獎金無上限｜遠端辦公】新竹地區_餐廳開發業務襄理",
+        "path": "/companies/foodpanda/jobs/20659",
+        "salary": "NT$ 35,500 - 100,000 (月薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "新竹市",
+        "companyId": 420,
+        "tags": [],
+        "company": {
+          "id": 420,
+          "path": "/companies/foodpanda",
+          "brand": "foodpanda 台灣總部",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/420/default/f1da6fe74d90af77daa29e9cf644a07775e71033.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/549/medium/2149fb69e7a118213b5a14b6b1b2ac2febc80220.png",
+          "badges": [
+            "dei",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/549/medium/2149fb69e7a118213b5a14b6b1b2ac2febc80220.png",
+          "canThirdPartyUrl": false,
+          "enName": "foodpanda"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 47735,
+        "name": "(Senior) Marketing Manager",
+        "path": "/companies/PicCollage/jobs/47735",
+        "salary": "NT$ 2,100,000 - 3,000,000 (年薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "Fluent in English",
+          "Team Leadership",
+          "Marketing Manager"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/0ca07ee2-a335-42f3-a3d0-b7cdfc788ebb?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48492,
+        "name": "(Senior) IT Specialist",
+        "path": "/companies/PicCollage/jobs/48492",
+        "salary": "NT$ 1,000,000 - 1,700,000 (年薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "Fluent in English",
+          "contractor",
+          "IT Operations",
+          "IT security",
+          "IT Specialist"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/7049c101-837a-4c33-8c0c-5999694dda34?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 47836,
+        "name": "Mobile Developer",
+        "path": "/companies/PicCollage/jobs/47836",
+        "salary": "NT$ 1,400,000 - 2,400,000 (年薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "Android",
+          "Kotlin",
+          "Media3 Transformer API",
+          "AI-assisted coding"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/6a785326-16bf-4e92-ba9c-01f20da3a30f?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 42000,
+        "name": "Senior People Ops Manager",
+        "path": "/companies/PicCollage/jobs/42000",
+        "salary": "NT$ 2,100,000 - 3,000,000 (年薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "HR",
+          "startup",
+          "Fluent in English",
+          "Senior People Operations"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/dfdd3fdb-091f-43c8-b5db-3c3636ae73e2?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48534,
+        "name": "Visual Designer",
+        "path": "/companies/PicCollage/jobs/48534",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "figma",
+          "visual design",
+          "Fluent in English",
+          "branding",
+          "Adobe CC"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/c29ec5a3-55b9-4185-9f0d-7704614a7e14?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 28298,
+        "name": "資深軟體工程師",
+        "path": "/companies/intelegence/jobs/28298",
+        "salary": "NT$ 60,000 -  (月薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 2002,
+        "tags": [
+          "Java",
+          "C#",
+          "Software Engineer",
+          "後端開發",
+          "Senior Backend Engineer"
+        ],
+        "company": {
+          "id": 2002,
+          "path": "/companies/intelegence",
+          "brand": "騰茲電通股份有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/002/002/default/b94b0f4f2fb68e5dabbb6681e2a0c441ffd219b6.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/241/medium/b008213f424c8c002d559a6629153c745a168ecc.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/241/medium/b008213f424c8c002d559a6629153c745a168ecc.png",
+          "canThirdPartyUrl": false,
+          "enName": "intelegence"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 39943,
+        "name": "【挑戰年薪17個月】電商平面設計師｜商品頁・募資頁視覺設計",
+        "path": "/companies/sangu/jobs/39943",
+        "salary": "NT$ 40,000 - 55,000 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 3044,
+        "tags": [
+          "平面設計",
+          "平面設計／美編人員",
+          "廣告設計"
+        ],
+        "company": {
+          "id": 3044,
+          "path": "/companies/sangu",
+          "brand": "SANGU 三谷家電｜東朱數位行銷股份有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/044/default/854f4117c833380ef7a2a8b1b466887fff88d02f.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/643/medium/f9b427c6309bd891153d834a8ebefdf1b4203790.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/643/medium/f9b427c6309bd891153d834a8ebefdf1b4203790.png",
+          "canThirdPartyUrl": false,
+          "enName": "sangu"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 39944,
+        "name": "【挑戰年薪百萬】商品行銷專案經理 Project Manager｜電商 × 募資全案操盤",
+        "path": "/companies/sangu/jobs/39944",
+        "salary": "NT$ 40,000 - 50,000 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 3044,
+        "tags": [
+          "電商",
+          "數位行銷",
+          "行銷企劃",
+          "品牌行銷",
+          "廣告創意",
+          "集資"
+        ],
+        "company": {
+          "id": 3044,
+          "path": "/companies/sangu",
+          "brand": "SANGU 三谷家電｜東朱數位行銷股份有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/044/default/854f4117c833380ef7a2a8b1b466887fff88d02f.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/643/medium/f9b427c6309bd891153d834a8ebefdf1b4203790.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/643/medium/f9b427c6309bd891153d834a8ebefdf1b4203790.png",
+          "canThirdPartyUrl": false,
+          "enName": "sangu"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 47755,
+        "name": "FDE/FAE 應用部署工程師 ( AI 現場導入)",
+        "path": "/companies/Kapito/jobs/47755",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "新竹市",
+        "companyId": 938,
+        "tags": [
+          "FAE",
+          "FDE"
+        ],
+        "company": {
+          "id": 938,
+          "path": "/companies/Kapito",
+          "brand": "開必拓數據",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/938/default/94f82ca52e359525ed5399970f65d64fdd8b6979.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/076/medium/45c4b565a8b1aa1f4053e556b7030c414fe1fb05.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/076/medium/45c4b565a8b1aa1f4053e556b7030c414fe1fb05.png",
+          "canThirdPartyUrl": false,
+          "enName": "Kapito"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 35920,
+        "name": "執行經紀",
+        "path": "/companies/walkingmusic/jobs/35920",
+        "salary": "NT$ 38,000 - 45,000 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 2784,
+        "tags": [
+          "行銷企劃",
+          "影視經紀"
+        ],
+        "company": {
+          "id": 2784,
+          "path": "/companies/walkingmusic",
+          "brand": "Walking Music 邊走邊聽有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/002/784/default/1fedc45e8c4b86f97d931e595f9b934187b39328.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/488/medium/249d5b587c0[phone]8e6b954d427a97ed8e5.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/488/medium/249d5b587c0[phone]8e6b954d427a97ed8e5.png",
+          "canThirdPartyUrl": false,
+          "enName": "walkingmusic"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      }
+    ]
+  }
+}

@@ -9,11 +9,15 @@ export type SourceErrorType = "blocked" | "http" | "network" | "schema";
 
 export class SourceError extends Error {
   readonly type: SourceErrorType;
+  readonly status?: number;
 
-  constructor(type: SourceErrorType, message: string) {
+  constructor(type: SourceErrorType, message: string, status?: number) {
     super(message);
     this.name = "SourceError";
     this.type = type;
+    if (status !== undefined) {
+      this.status = status;
+    }
   }
 }
 
@@ -48,6 +52,12 @@ async function throttle(source: string): Promise<void> {
   } finally {
     release();
   }
+}
+
+const CF_CHALLENGE_TITLE_RE = /<title[^>]*>[^<]*(?:Just a moment|Attention Required)/i;
+
+function isCloudflareChallenge(text: string): boolean {
+  return text.includes("window._cf_chl_opt") || CF_CHALLENGE_TITLE_RE.test(text);
 }
 
 export interface RequestOptions {
@@ -101,10 +111,10 @@ export async function request<T = unknown>(
   }
 
   if (res.status === 403 || res.status === 429) {
-    throw new SourceError("blocked", `被 ${source} 阻擋（HTTP ${res.status}），請稍後再試`);
+    throw new SourceError("blocked", `被 ${source} 阻擋（HTTP ${res.status}），請稍後再試`, res.status);
   }
   if (res.status >= 400) {
-    throw new SourceError("http", `${source} 回應錯誤（HTTP ${res.status}）`);
+    throw new SourceError("http", `${source} 回應錯誤（HTTP ${res.status}）`, res.status);
   }
 
   let text: string;
@@ -123,6 +133,9 @@ export async function request<T = unknown>(
   }
 
   if (expect === "text") {
+    if (isCloudflareChallenge(text)) {
+      throw new SourceError("blocked", `被 ${source} 阻擋（Cloudflare 挑戰頁），請稍後再試`, res.status);
+    }
     return text as T;
   }
 

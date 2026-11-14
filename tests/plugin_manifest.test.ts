@@ -26,4 +26,14 @@ describe("plugin manifest", () => {
     const text = fs.readFileSync(MANIFEST, "utf-8");
     expect(text).not.toContain("tvly-");
   });
+
+  it("test_manifest_description_mentions_yourator", () => {
+    const raw = JSON.parse(fs.readFileSync(MANIFEST, "utf-8"));
+    expect(raw.description).toContain("Yourator");
+  });
+
+  it("test_manifest_version_is_0_4_0", () => {
+    const raw = JSON.parse(fs.readFileSync(MANIFEST, "utf-8"));
+    expect(raw.version).toBe("0.4.0");
+  });
 });

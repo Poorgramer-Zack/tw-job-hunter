@@ -1,18 +1,21 @@
 # tw-job-hunter
 
-讓 Claude 直接搜尋 104 人力銀行職缺、讀取完整 JD，並查詢公司的登記資料與社群口碑的本機 MCP server。
+讓 Claude 直接搜尋 104 人力銀行與 Yourator 職缺、讀取完整 JD，並查詢公司的登記資料與社群口碑的本機 MCP server。
 
-> **研究學習用途、非官方專案、僅限個人使用。** 本專案與 104、GoodJob、求職天眼通、面試趣等網站沒有任何關係，使用的是這些網站前端自己呼叫、但未公開文件化的端點。請保持低頻、不要大量抓取、不要商業使用，並自行閱讀各站條款、承擔風險。詳見下方〈條款與風險〉。
+> **研究學習用途、非官方專案、僅限個人使用。** 本專案與 104、Yourator、GoodJob、求職天眼通、面試趣等網站沒有任何關係，使用的是這些網站前端自己呼叫、但未公開文件化的端點。請保持低頻、不要大量抓取、不要商業使用，並自行閱讀各站條款、承擔風險。詳見下方〈條款與風險〉。
 
 ## 功能
 
 | 工具 / Skill | 說明 |
 |---|---|
-| `job104_search` (MCP) | 搜尋職缺，回傳精簡清單（每頁約 20 筆）與分頁資訊 |
-| `job104_job_detail` (MCP) | 讀取單一職缺的完整內容：JD、薪資、工作條件、應徵條件、福利 |
+| `job104_search` (MCP) | 搜尋 104 職缺，回傳精簡清單（每頁約 20 筆）與分頁資訊 |
+| `job104_job_detail` (MCP) | 讀取單一 104 職缺的完整內容：JD、薪資、工作條件、應徵條件、福利 |
+| `yourator_search` (MCP) | 搜尋 Yourator 職缺，回傳精簡清單（每頁 20 筆）與 `has_more`（無總筆數） |
+| `yourator_job_detail` (MCP) | 讀取單一 Yourator 職缺完整內容、遠端工作與面試型態，以及公司法定名稱 |
 | `company_research` (MCP) | 公司研調：經濟部登記資料 + GoodJob / 天眼通 / 面試趣口碑，只給事實不給評分 |
 | `parse_resume_pdf` (MCP) | 本機 PDF 履歷無損解析：高保真提取文字、分頁與章節結構，支援中文字元修復 |
-| `analyze_job_fit` (MCP) | 履歷與 104 職缺適配度診斷：硬性門檻核對、優勢契合點與缺漏技能清單 |
+| `job-fit` (Skill) | 比對履歷與 JD（104／Yourator 網址，或任何平台貼上的 JD 文字），列出硬性條件、契合點、缺口與推測事項；不輸出分數 |
+| `job-hunt-flow` (Skill) | 串起搜尋、篩選、選定、適配度、公司研調、履歷調整與自薦信，每步交棒並在需要決定時停下來 |
 | `resume-advisor` (Skill) | 履歷調整建議：依台灣人資偏好進行 STAR 量化改寫、關鍵字鏡像，杜絕 AI 腔調與中國用語 |
 | `cover-letter` (Skill) | 自薦信擬定：300 字內四段式自然書信，無 `[...]` 標題、直擊職缺痛點且絕不自曝弱點 |
 
@@ -73,6 +76,31 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 
 職缺已下架時回傳 `{"status": "not_found"}`。
 
+### `yourator_search`
+
+| 參數 | 型別 | 說明 |
+|---|---|---|
+| `keyword` | str | 關鍵字（必填） |
+| `page` | int | 頁碼，預設 1。Yourator 不提供總筆數，僅回傳 `has_more` |
+| `areas` | list[str] | 中文地名，可多個，如 `["台北市", "新北市"]`（「台」「臺」通用，取自公開清單） |
+| `job_categories` | list[str] | 中文職類子類名稱，可多個，如 `["前端工程"]` |
+| `remote` | `full` / `partial` / `any` | 完全遠端 / 部分遠端 / 兩者皆可（聯集）。此為 Yourator 站方分類（由公司自填），單筆細節請讀 `yourator_job_detail` |
+| `salary_min` | int | 薪資下限。採用**區間重疊**語意（職缺薪資區間與指定下限以上有重疊即符合，例如下限 60,000 可能含 40,000–70,000），並排除「面議」職缺 |
+| `salary_type` | `monthly` / `yearly` | 月薪或年薪，預設月薪（年薪會除以 12 無條件進位換算為月薪） |
+| `job_type` | `full_time` / `part_time` / `contract` / `temporary` / `intern` | 正職 / 副業或兼職 / 承攬 / 約聘 / 實習 |
+| `order` | `relevance` / `newest` | 相關度（預設）/ 最近更新 |
+
+### `yourator_job_detail`
+
+| 參數 | 型別 | 說明 |
+|---|---|---|
+| `job` | str | 職缺網址（如 `https://www.yourator.co/companies/{公司}/jobs/{編號}`）或路徑（`/companies/{公司}/jobs/{編號}`） |
+
+- 遠端型態分開回傳 `remote_work`（遠端工作）與 `remote_interview`（遠端面試），各自為 `full` / `partial` / `none` / `unknown` 並附原文。
+- 若職缺頁面無 DOM 內容區塊但有結構化資料（JSON-LD），會降級把描述文字放進 `work_content`（可能同時包含條件要求），其餘內容欄位為 `null`。
+- Yourator 不提供統一編號，結果僅回傳 `company_legal_name`，可傳給 `company_research` 查詢登記資料與口碑。
+- 職缺不存在或已關閉時回傳 `{"status": "not_found"}`。
+
 ### `company_research`
 
 | 參數 | 型別 | 說明 |
@@ -104,15 +132,6 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 
 回傳分頁內容、總字元數與啟發式切分之履歷區塊（經歷、技能、專案、學歷等）。
 
-### `analyze_job_fit`
-
-| 參數 | 型別 | 說明 |
-|---|---|---|
-| `resume_pdf_path` | str | 本機 PDF 履歷檔案路徑 |
-| `job_url_or_code` | str | 104 職缺網址或代碼 |
-
-比對求職者學歷、年資、必備工具與技能標籤，產出結構化核對結果與核心優勢事實，拒絕無依據的假精確錄取率。
-
 ## 獨立 Skills
 
 ### `/resume-advisor` (履歷調整建議)
@@ -125,6 +144,18 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 - **嚴禁中括號標題**：禁止輸出 `[動機]`、`[核心優勢]`、`[...]` 等標籤，段落間僅以空行自然銜接。
 - **嚴格禁止自曝弱點**：未掌握或熟練度不高之技能一律不提，嚴禁出現自我削弱的語句。
 
+### `/job-fit` (適配度分析)
+- 固定五區塊輸出，順序不可調換：**硬性條件、契合點、缺口、推測事項、待釐清**。
+- JD 支援 104 與 Yourator 職缺網址，也能直接貼上任何平台的 JD 文字；履歷可給 PDF 路徑解析，或直接貼上文字。
+- **不輸出分數、百分比、星等**：履歷沒寫的一律標「未提及」，不把猜測寫成事實。
+- **推測事項獨立一區**：JD 沒寫、但依職務內容可能需要的能力，每項開頭標「推測」，與明文要求分開列。
+
+### `/job-hunt-flow` (求職流程引導)
+- 串起完整流程：搜尋 → 篩選 → 選定 → 適配度 → 公司研調 → 履歷調整（可選）→ 自薦信。
+- 每一步交棒給對應的工具或 Skill（`job104_search`、`yourator_search`、`company_research`、`job-fit`、`resume-advisor`、`cover-letter`），這個 Skill 只管順序。
+- 在**篩選後、適配度完成後、研調後、自薦信前**停下來問使用者，不會自動跑完整條流程。
+- 可從任一階段開始：已給職缺網址就跳到選定，已貼上 JD 就跳到適配度。
+
 ## 錯誤
 
 所有錯誤都以 `{"error": {"type": ..., "message": ...}}` 回傳，不會讓 server 崩潰：
@@ -135,13 +166,14 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 | `network` | 逾時、連線失敗或 5xx |
 | `schema` | 104 回應格式可能已改變，需要更新程式 |
 | `invalid_input` | 參數錯誤，訊息會列出允許的值 |
-| `not_found` | 找不到檔案：PDF 路徑打錯或檔案已移動（`parse_resume_pdf`、`analyze_job_fit`） |
+| `not_found` | 找不到檔案：PDF 路徑打錯或檔案已移動（`parse_resume_pdf`） |
 
 ## 條款與風險
 
 這個專案使用多個網站未公開的端點，**不代表這些網站允許這樣的使用**：
 
 - **104**：會員條款禁止以程式自動化存取網站資料。
+- **Yourator**：`robots.txt` 僅禁止 `/r/*`（本專案不存取該路徑），所有請求皆匿名唯讀且遵守節流。但列表與詳情端點仍屬未公開文件化的前端資料介面，請保持低頻使用。
 - **求職天眼通**：條款第 11 條禁止未經書面同意「使用、修改、重製」網站內容。本工具會取得評論文字並交給 Claude 判讀，屬於灰色地帶；內容只在當次查詢使用、不落地儲存。
 - **面試趣**：條款禁止以自動化方式蒐集其他用戶的內容，也禁止繞過限制。本工具只讀取公開的彙總數字，不登入、不解鎖、不取心得內容，並避開 robots.txt 禁止的路徑。
 - **GoodJob**：條款中沒有看到禁止自動存取的條文，但 API 未公開文件化，隨時可能改變。
@@ -165,18 +197,20 @@ Cloudflare 會看 TLS 指紋：舊版用 Python 時，`httpx` 與 `curl_cffi`（
 
 ```
 src/
-  server.ts          # MCP server：註冊 5 個工具，錯誤轉成結構化結果
+  server.ts          # MCP server：註冊 6 個工具，錯誤轉成結構化結果
   job104/            # 104：client（節流、被擋偵測）、codes（地區/職類代碼）、search、detail
+  yourator/          # Yourator：codes（地區/職類代碼）、search、detail（共用 company/http.ts 節流）
   company/           # 公司研調：research 是入口，各來源一個模組
     http.ts          #   共用 HTTP 層（逾時、錯誤分類、每來源 2 秒間隔）與 graphql helper
     registry.ts      #   經濟部商工登記
     goodjob.ts  qollie.ts  interview_tw.ts  web.ts   # 各口碑來源
     common.ts  links.ts                              # 共用小工具、各站連結
-  resume/            # 履歷與適配度分析
+  resume/            # 履歷解析
     parser.ts        #   unpdf 本機 PDF 解析與中文字元清洗
-    analyzer.ts      #   職缺條件與履歷適配度診斷
     locale_rules.ts  #   speak-human-tw 繁體在地化與去 AI 腔調規則庫
 skills/              # 獨立 Skills
+  job-hunt-flow/     #   求職流程引導 Skill
+  job-fit/           #   適配度分析 Skill
   resume-advisor/    #   履歷調整建議 Skill
   cover-letter/      #   自薦信擬定 Skill
 tests/               # vitest 測試（fixtures/ 為錄製並去識別化的回應）
@@ -191,7 +225,7 @@ dist/                # 建置產物 server.js，要隨程式碼一起 commit
 
 ```
 npm install
-npm test                              # vitest，211 個測試
+npm test                              # vitest，298 個測試
 npm run build                         # tsup，打包成單一 dist/server.js
 ./node_modules/.bin/tsc --noEmit      # 型別檢查（Windows PowerShell 用 .\node_modules\.bin\tsc.cmd --noEmit）
 ```
@@ -203,6 +237,7 @@ plugin 安裝時不會跑建置，實際執行的是 repo 裡的 `dist/server.js
 ```
 npx tsx scripts/record-fixtures.ts                    # 104（4 個請求 + 1 個 404 探測）
 npx tsx scripts/record-fixtures.ts --probe            # 另外實測 104 篩選參數語意
+npx tsx scripts/record-yourator-fixtures.ts           # Yourator（公開列表、代碼表與詳情，已去識別化）
 TAVILY_API_KEY=... npx tsx scripts/record-company-fixtures.ts [gcis|goodjob|qollie|itw|tavily]  # 公司研調各來源
 ```
 

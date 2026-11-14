@@ -1,0 +1,543 @@
+{
+  "payload": {
+    "hasMore": true,
+    "currentPage": 1,
+    "nextPage": 2,
+    "recommendedJobs": [],
+    "trendingKeywords": [],
+    "jobs": [
+      {
+        "id": 48361,
+        "name": "車隊路線最佳化軟體工程師（Python / OR-Tools / GIS）",
+        "path": "/companies/ridefair/jobs/48361",
+        "salary": "NT$ 85,000 -  (月薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "高雄市",
+        "companyId": 3539,
+        "tags": [],
+        "company": {
+          "id": 3539,
+          "path": "/companies/ridefair",
+          "brand": "RideFair 睿德菲爾有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/539/default/900f8307fd664a81350310d54ae6bdd114df2d44.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/792/medium/9196f5ff9a9bd3fc127bcb1da3cf7340803341c8.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/792/medium/9196f5ff9a9bd3fc127bcb1da3cf7340803341c8.png",
+          "canThirdPartyUrl": false,
+          "enName": "ridefair"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 47902,
+        "name": "初階軟體工程師（GPS 資料與路線最佳化）Junior Software Engineer, GPS Data and Route Optimization",
+        "path": "/companies/ridefair/jobs/47902",
+        "salary": "NT$ 300 - 300 (時薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "高雄市",
+        "companyId": 3539,
+        "tags": [],
+        "company": {
+          "id": 3539,
+          "path": "/companies/ridefair",
+          "brand": "RideFair 睿德菲爾有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/539/default/900f8307fd664a81350310d54ae6bdd114df2d44.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/792/medium/9196f5ff9a9bd3fc127bcb1da3cf7340803341c8.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/792/medium/9196f5ff9a9bd3fc127bcb1da3cf7340803341c8.png",
+          "canThirdPartyUrl": false,
+          "enName": "ridefair"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48735,
+        "name": "資深軟體測試開發工程師｜Senior SDET",
+        "path": "/companies/jkopay/jobs/48735",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 813,
+        "tags": [],
+        "company": {
+          "id": 813,
+          "path": "/companies/jkopay",
+          "brand": "街口電子支付",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/813/default/1e240b8f73ed6b4f46866bdfdfeea273734b6ee0.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/949/medium/0fc0ac4cb731b2cd52d7175140cdeb8ce0a14135.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/949/medium/0fc0ac4cb731b2cd52d7175140cdeb8ce0a14135.png",
+          "canThirdPartyUrl": true,
+          "enName": "jkopay"
+        },
+        "thirdPartyUrl": "https://jkopay.teamdoor.io/s/YZNwYrFw",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 48492,
+        "name": "(Senior) IT Specialist",
+        "path": "/companies/PicCollage/jobs/48492",
+        "salary": "NT$ 1,000,000 - 1,700,000 (年薪)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 3,
+        "tags": [
+          "Fluent in English",
+          "contractor",
+          "IT Operations",
+          "IT security",
+          "IT Specialist"
+        ],
+        "company": {
+          "id": 3,
+          "path": "/companies/PicCollage",
+          "brand": "PicCollage 拼貼趣",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/003/default/34b5d2a08ade1d053a9297b91d6f846376611efe.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/014/medium/dc2dd676910a9d73f15ae335c4091b46a4ad5aee.png",
+          "canThirdPartyUrl": true,
+          "enName": "PicCollage"
+        },
+        "thirdPartyUrl": "https://jobs.lever.co/piccollage/7049c101-837a-4c33-8c0c-5999694dda34?lever-origin=applied&lever-source%5B%5D=Yourator",
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 49073,
+        "name": "【新竹】資訊高級工程師",
+        "path": "/companies/unitedorthopedic/jobs/49073",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "新竹市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/MFjTnbv4",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 49074,
+        "name": "【高雄】資訊高級工程師",
+        "path": "/companies/unitedorthopedic/jobs/49074",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "高雄市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/ucluRStT",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 49071,
+        "name": "【新竹】技術專案分析工程師",
+        "path": "/companies/unitedorthopedic/jobs/49071",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "新竹市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/QuWkHiHV",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 49072,
+        "name": "【高雄】技術專案分析工程師",
+        "path": "/companies/unitedorthopedic/jobs/49072",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "高雄市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/78WXZ2Xr",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 40179,
+        "name": "[RD] 網站可靠性工程師 Site Reliability Engineer (hybrid)",
+        "path": "/companies/thingnario/jobs/40179",
+        "salary": "NT$ 1,500,000 - 2,000,000 (年薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1065,
+        "tags": [],
+        "company": {
+          "id": 1065,
+          "path": "/companies/thingnario",
+          "brand": "慧景科技thingnario ",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/065/default/acc23df3ffe0b218e3323c1f9952d89e5793fc5d.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/203/medium/b81d0ae93fde3ca3a64c82b34ffef8c80ca339c0.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/203/medium/b81d0ae93fde3ca3a64c82b34ffef8c80ca339c0.png",
+          "canThirdPartyUrl": true,
+          "enName": "thingnario"
+        },
+        "thirdPartyUrl": "https://thingnario.teamdoor.io/s/xxCaZrT9",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 49082,
+        "name": "【高雄】BI 數據分析工程師",
+        "path": "/companies/unitedorthopedic/jobs/49082",
+        "salary": "NT$ 40,000 - 60,000 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "高雄市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/PNKdjE0i",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 49109,
+        "name": "【新竹】BI 數據分析工程師",
+        "path": "/companies/unitedorthopedic/jobs/49109",
+        "salary": "NT$ 40,000 - 60,000 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "新竹市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/KSZeDzcj",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 49111,
+        "name": "【台北】BI 數據分析工程師",
+        "path": "/companies/unitedorthopedic/jobs/49111",
+        "salary": "NT$ 40,000 - 60,000 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "新北市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/B7oSzjWL",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 42110,
+        "name": "資料庫管理師",
+        "path": "/companies/UCCapital/jobs/42110",
+        "salary": "NT$ 1,200,000 - 3,000,000 (年薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 3113,
+        "tags": [],
+        "company": {
+          "id": 3113,
+          "path": "/companies/UCCapital",
+          "brand": "優式資本 UC Capital",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/113/default/167c2ccce206d343d0b1c32c3251397a8750a70a.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/627/medium/52461ecbb1e833491a4231515c093ffc8b7f2d3e.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/627/medium/52461ecbb1e833491a4231515c093ffc8b7f2d3e.png",
+          "canThirdPartyUrl": true,
+          "enName": "UCCapital"
+        },
+        "thirdPartyUrl": "https://UCCapital.teamdoor.io/s/Pj6pRIPt",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 41999,
+        "name": "異常監控分析專員",
+        "path": "/companies/taishinbank/jobs/41999",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1091,
+        "tags": [],
+        "company": {
+          "id": 1091,
+          "path": "/companies/taishinbank",
+          "brand": "台新新光金控_台新國際商業銀行",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/091/default/ea3a430eb28e0cf6787846991c0b994f9a3cbb15.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/230/medium/2c3c04de02d8e108693fa80dec7ff35305ee0fb2.png",
+          "badges": [
+            "dei",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/230/medium/2c3c04de02d8e108693fa80dec7ff35305ee0fb2.png",
+          "canThirdPartyUrl": false,
+          "enName": "taishinbank"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 40187,
+        "name": "[RD] 物聯網資料工程師 AIoT Data Engineer (hybrid)",
+        "path": "/companies/thingnario/jobs/40187",
+        "salary": "NT$ 1,400,000 - 2,000,000 (年薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1065,
+        "tags": [],
+        "company": {
+          "id": 1065,
+          "path": "/companies/thingnario",
+          "brand": "慧景科技thingnario ",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/065/default/acc23df3ffe0b218e3323c1f9952d89e5793fc5d.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/203/medium/b81d0ae93fde3ca3a64c82b34ffef8c80ca339c0.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/203/medium/b81d0ae93fde3ca3a64c82b34ffef8c80ca339c0.png",
+          "canThirdPartyUrl": true,
+          "enName": "thingnario"
+        },
+        "thirdPartyUrl": "https://thingnario.teamdoor.io/s/OBTc545V",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 45686,
+        "name": "軟體工程師",
+        "path": "/companies/UCCapital/jobs/45686",
+        "salary": "NT$ 1,200,000 - 3,600,000 (年薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 3113,
+        "tags": [],
+        "company": {
+          "id": 3113,
+          "path": "/companies/UCCapital",
+          "brand": "優式資本 UC Capital",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/113/default/167c2ccce206d343d0b1c32c3251397a8750a70a.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/627/medium/52461ecbb1e833491a4231515c093ffc8b7f2d3e.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/627/medium/52461ecbb1e833491a4231515c093ffc8b7f2d3e.png",
+          "canThirdPartyUrl": true,
+          "enName": "UCCapital"
+        },
+        "thirdPartyUrl": "https://UCCapital.teamdoor.io/s/bjvG5TMC",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 40186,
+        "name": "[RD] 資深IoT軟韌體工程師 IoT Firmware Engineer （hybrid）",
+        "path": "/companies/thingnario/jobs/40186",
+        "salary": "NT$ 1,500,000 - 2,000,000 (年薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1065,
+        "tags": [],
+        "company": {
+          "id": 1065,
+          "path": "/companies/thingnario",
+          "brand": "慧景科技thingnario ",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/065/default/acc23df3ffe0b218e3323c1f9952d89e5793fc5d.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/203/medium/b81d0ae93fde3ca3a64c82b34ffef8c80ca339c0.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/203/medium/b81d0ae93fde3ca3a64c82b34ffef8c80ca339c0.png",
+          "canThirdPartyUrl": true,
+          "enName": "thingnario"
+        },
+        "thirdPartyUrl": "https://thingnario.teamdoor.io/s/0wc1xnAT",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 49065,
+        "name": "【台北】系統分析工程師（SA）",
+        "path": "/companies/unitedorthopedic/jobs/49065",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "新北市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/NM3h9Nbh",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 49066,
+        "name": "【新竹】系統分析工程師（SA）",
+        "path": "/companies/unitedorthopedic/jobs/49066",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "新竹市",
+        "companyId": 3634,
+        "tags": [],
+        "company": {
+          "id": 3634,
+          "path": "/companies/unitedorthopedic",
+          "brand": "UNITEDORTHOPEDIC",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/634/default/fc3ecab05fc3bb5119a58d61c1cd5df3c18e9135.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/828/medium/e7863d7fbe69a5ea4f478a29615deafe0a617fef.png",
+          "canThirdPartyUrl": true,
+          "enName": "unitedorthopedic"
+        },
+        "thirdPartyUrl": "https://unitedorthopedic.teamdoor.io/s/MehThwdd",
+        "follow": false,
+        "externalSource": "teamdoor"
+      },
+      {
+        "id": 47782,
+        "name": "AI 工程師 ｜ AI Engineer",
+        "path": "/companies/Tricuss/jobs/47782",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 2992,
+        "tags": [
+          "後端工程師",
+          "機器學習",
+          "AI工程師"
+        ],
+        "company": {
+          "id": 2992,
+          "path": "/companies/Tricuss",
+          "brand": "十論科技股份有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/002/992/default/018ef19120fe51976f42896b8592d097860de309.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/577/medium/3236a5bea61949a0c742e0ca8a2424e16e1a6824.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/577/medium/3236a5bea61949a0c742e0ca8a2424e16e1a6824.png",
+          "canThirdPartyUrl": false,
+          "enName": "Tricuss"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      }
+    ]
+  }
+}

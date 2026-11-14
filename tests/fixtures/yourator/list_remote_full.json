@@ -1,0 +1,593 @@
+{
+  "payload": {
+    "hasMore": true,
+    "currentPage": 1,
+    "nextPage": 2,
+    "recommendedJobs": [],
+    "trendingKeywords": [],
+    "jobs": [
+      {
+        "id": 48213,
+        "name": "KOL 行銷企劃（遠端 / 兼職）",
+        "path": "/companies/seeds/jobs/48213",
+        "salary": "NT$ 15,000 - 40,000 (論件計酬)",
+        "lastActiveAt": "一天內更新",
+        "location": "臺北市",
+        "companyId": 1983,
+        "tags": [],
+        "company": {
+          "id": 1983,
+          "path": "/companies/seeds",
+          "brand": "學籽 Seeducation",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/983/default/49fde89c282672f7c2098d3fb285404877b97420.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/126/medium/d87487d861e513648a7d283790d19713e97e377b.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/126/medium/d87487d861e513648a7d283790d19713e97e377b.png",
+          "canThirdPartyUrl": false,
+          "enName": "seeds"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48258,
+        "name": "Data Analyst（長期專案、遠端）",
+        "path": "/companies/centific/jobs/48258",
+        "salary": "NT$ 200 - 250 (時薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 3103,
+        "tags": [
+          "AI",
+          "data analysis",
+          "Data Analyst",
+          "data processing/analytics",
+          "Annotator"
+        ],
+        "company": {
+          "id": 3103,
+          "path": "/companies/centific",
+          "brand": "美商昇迪凡科技術有限公司台灣分公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/103/default/0525dd1af92e4311ba1d0b7e6b08e0bf8f5e9f48.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/808/medium/7f9679d42bd22b2bbee6b5a5048c618953db3160.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/808/medium/7f9679d42bd22b2bbee6b5a5048c618953db3160.png",
+          "canThirdPartyUrl": false,
+          "enName": "centific"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 38961,
+        "name": "英文庫 - UI/UX Designer｜(全遠端) 長期接案合作",
+        "path": "/companies/english-cool/jobs/38961",
+        "salary": "NT$ 800 - 800 (時薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1587,
+        "tags": [
+          "UI/UX",
+          "UIUX",
+          "UI/UX工程師",
+          "UI/UX designer"
+        ],
+        "company": {
+          "id": 1587,
+          "path": "/companies/english-cool",
+          "brand": "英文庫有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/587/default/3c80a5f9a179674eabb0d157730383c8c0a0c855.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/726/medium/2c6b3c854b3dd6dc5d154d412a9ea50eadbed02f.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/726/medium/2c6b3c854b3dd6dc5d154d412a9ea50eadbed02f.png",
+          "canThirdPartyUrl": false,
+          "enName": "english-cool"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 38611,
+        "name": "英文庫 - 行銷企劃（教育軟體業/全遠端）",
+        "path": "/companies/english-cool/jobs/38611",
+        "salary": "NT$ 65,000 - 65,000 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1587,
+        "tags": [
+          "數位行銷",
+          "行銷企劃",
+          "社群行銷",
+          "廣告投放",
+          "行銷數據"
+        ],
+        "company": {
+          "id": 1587,
+          "path": "/companies/english-cool",
+          "brand": "英文庫有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/587/default/3c80a5f9a179674eabb0d157730383c8c0a0c855.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/726/medium/2c6b3c854b3dd6dc5d154d412a9ea50eadbed02f.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/726/medium/2c6b3c854b3dd6dc5d154d412a9ea50eadbed02f.png",
+          "canThirdPartyUrl": false,
+          "enName": "english-cool"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 47448,
+        "name": "線上體態管理教練（遠端工作）",
+        "path": "/companies/Nuli-app/jobs/47448",
+        "salary": "NT$ 35,000 - 99,998 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1560,
+        "tags": [
+          "健身品牌"
+        ],
+        "company": {
+          "id": 1560,
+          "path": "/companies/Nuli-app",
+          "brand": "Nuli app",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/560/default/9c44109dc35f51e62dd837caa66665d287137dc9.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/699/medium/8f44dfbc37296e6d3d88e9cbd1602752ddc39412.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/699/medium/8f44dfbc37296e6d3d88e9cbd1602752ddc39412.png",
+          "canThirdPartyUrl": false,
+          "enName": "Nuli-app"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 37254,
+        "name": "課程銷售顧問（兼職遠端工作）",
+        "path": "/companies/Nuli-app/jobs/37254",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1560,
+        "tags": [
+          "CRM",
+          "產品銷售",
+          "銷售分析",
+          "產品介紹及解說銷售"
+        ],
+        "company": {
+          "id": 1560,
+          "path": "/companies/Nuli-app",
+          "brand": "Nuli app",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/560/default/9c44109dc35f51e62dd837caa66665d287137dc9.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/699/medium/8f44dfbc37296e6d3d88e9cbd1602752ddc39412.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/699/medium/8f44dfbc37296e6d3d88e9cbd1602752ddc39412.png",
+          "canThirdPartyUrl": false,
+          "enName": "Nuli-app"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 41069,
+        "name": "Sales Manager (Head of Sales)",
+        "path": "/companies/Nuli-app/jobs/41069",
+        "salary": "NT$ 90,000 - 200,000 (月薪)",
+        "lastActiveAt": "一週內更新",
+        "location": "臺北市",
+        "companyId": 1560,
+        "tags": [
+          "銷售業務",
+          "業務經理",
+          "業務銷售",
+          "顧問銷售",
+          "銷售經理"
+        ],
+        "company": {
+          "id": 1560,
+          "path": "/companies/Nuli-app",
+          "brand": "Nuli app",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/560/default/9c44109dc35f51e62dd837caa66665d287137dc9.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/699/medium/8f44dfbc37296e6d3d88e9cbd1602752ddc39412.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/699/medium/8f44dfbc37296e6d3d88e9cbd1602752ddc39412.png",
+          "canThirdPartyUrl": false,
+          "enName": "Nuli-app"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 38897,
+        "name": "Frontend Engineer 前端工程師（React Native）",
+        "path": "/companies/OakMega/jobs/38897",
+        "salary": "NT$ 50,000 - 100,000 (月薪)",
+        "lastActiveAt": "兩週內更新",
+        "location": "臺北市",
+        "companyId": 158,
+        "tags": [
+          "ReactJS",
+          "ReactNative",
+          "Frontend Engineer"
+        ],
+        "company": {
+          "id": 158,
+          "path": "/companies/OakMega",
+          "brand": "OakMega 大橡科技",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/158/default/caa346a5a17c50afc825e0f83c27eb5222b48fd1.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/202/medium/15f81e44755cba68d9dedbfec41bdf43593127ae.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/202/medium/15f81e44755cba68d9dedbfec41bdf43593127ae.png",
+          "canThirdPartyUrl": true,
+          "enName": "OakMega"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48664,
+        "name": "資深客戶成功專員",
+        "path": "/companies/2f3bf8f0/jobs/48664",
+        "salary": "NT$ 32,000 - 40,000 (月薪)",
+        "lastActiveAt": "兩週內更新",
+        "location": "臺北市",
+        "companyId": 3181,
+        "tags": [
+          "客戶服務",
+          "客戶成功",
+          "客戶成功顧問"
+        ],
+        "company": {
+          "id": 3181,
+          "path": "/companies/2f3bf8f0",
+          "brand": "茉蕾整理有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/181/default/4e888199c89163890b1cd54d284e6517a57aa934.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/652/medium/49d72c44c9c97ba07c8bcfc1371cdcf51a44d940.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/652/medium/49d72c44c9c97ba07c8bcfc1371cdcf51a44d940.png",
+          "canThirdPartyUrl": false,
+          "enName": "2f3bf8f0"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 36710,
+        "name": "Knowledge Pie! 知識派｜ 課程內容編輯（接案合作）",
+        "path": "/companies/simpleinfo/jobs/36710",
+        "salary": "NT$ 1,000 - 3,000 (論件計酬)",
+        "lastActiveAt": "兩週內更新",
+        "location": "臺北市",
+        "companyId": 437,
+        "tags": [
+          "線上課程",
+          "文字編輯",
+          "課程企劃"
+        ],
+        "company": {
+          "id": 437,
+          "path": "/companies/simpleinfo",
+          "brand": "簡訊設計｜圖文不符",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/437/default/e2fa59a3fe029ca8e06093792a0843131ef51df4.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/566/medium/267b0780264cf1791845da7b8155318298f59570.jpg",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/566/medium/267b0780264cf1791845da7b8155318298f59570.jpg",
+          "canThirdPartyUrl": false,
+          "enName": "simpleinfo"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 46231,
+        "name": "短影音企劃／腳本寫手（接案合作）｜Knowledge Pie! 知識派",
+        "path": "/companies/simpleinfo/jobs/46231",
+        "salary": "NT$ 800 - 1,500 (論件計酬)",
+        "lastActiveAt": "兩週內更新",
+        "location": "臺北市",
+        "companyId": 437,
+        "tags": [
+          "影音企劃",
+          "自媒體內容創意",
+          "腳本"
+        ],
+        "company": {
+          "id": 437,
+          "path": "/companies/simpleinfo",
+          "brand": "簡訊設計｜圖文不符",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/437/default/e2fa59a3fe029ca8e06093792a0843131ef51df4.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/566/medium/267b0780264cf1791845da7b8155318298f59570.jpg",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/566/medium/267b0780264cf1791845da7b8155318298f59570.jpg",
+          "canThirdPartyUrl": false,
+          "enName": "simpleinfo"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 47686,
+        "name": "Knowledge Pie! 知識派｜產品行銷企劃（接案合作）",
+        "path": "/companies/simpleinfo/jobs/47686",
+        "salary": "NT$ 5,000 - 10,000 (論件計酬)",
+        "lastActiveAt": "兩週內更新",
+        "location": "臺北市",
+        "companyId": 437,
+        "tags": [],
+        "company": {
+          "id": 437,
+          "path": "/companies/simpleinfo",
+          "brand": "簡訊設計｜圖文不符",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/437/default/e2fa59a3fe029ca8e06093792a0843131ef51df4.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/566/medium/267b0780264cf1791845da7b8155318298f59570.jpg",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/566/medium/267b0780264cf1791845da7b8155318298f59570.jpg",
+          "canThirdPartyUrl": false,
+          "enName": "simpleinfo"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48507,
+        "name": "專案制兼差客服人員（接案合作）｜Knowledge Pie! 知識派",
+        "path": "/companies/simpleinfo/jobs/48507",
+        "salary": "NT$ 205 - 205 (時薪)",
+        "lastActiveAt": "兩週內更新",
+        "location": "臺北市",
+        "companyId": 437,
+        "tags": [],
+        "company": {
+          "id": 437,
+          "path": "/companies/simpleinfo",
+          "brand": "簡訊設計｜圖文不符",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/437/default/e2fa59a3fe029ca8e06093792a0843131ef51df4.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/566/medium/267b0780264cf1791845da7b8155318298f59570.jpg",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/566/medium/267b0780264cf1791845da7b8155318298f59570.jpg",
+          "canThirdPartyUrl": false,
+          "enName": "simpleinfo"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48493,
+        "name": "〖遠端兼職｜可轉正〗數位廣告投放專員（Performance Marketing Specialist）",
+        "path": "/companies/mooorning/jobs/48493",
+        "salary": "NT$ 10,000 -  (論件計酬)",
+        "lastActiveAt": "一個月內更新",
+        "location": "臺北市",
+        "companyId": 3553,
+        "tags": [
+          "數位廣告",
+          "廣告成效分析及優化",
+          "廣告投手"
+        ],
+        "company": {
+          "id": 3553,
+          "path": "/companies/mooorning",
+          "brand": "早安蟲有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/553/default/0134923b483a1079a765cbcdb595ecc02a218e7c.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/797/medium/12e595f7004a13f8fc6b3d29a87780969f0e50f5.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/797/medium/12e595f7004a13f8fc6b3d29a87780969f0e50f5.png",
+          "canThirdPartyUrl": false,
+          "enName": "mooorning"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48525,
+        "name": "[遠端工作/WFH] 行銷廣告投手｜數位廣告投放專員（Performance Marketing Specialist）【電商平台meepShop】",
+        "path": "/companies/meepShop/jobs/48525",
+        "salary": "NT$ 55,000 - 60,000 (月薪)",
+        "lastActiveAt": "一個月內更新",
+        "location": "新北市",
+        "companyId": 12,
+        "tags": [],
+        "company": {
+          "id": 12,
+          "path": "/companies/meepShop",
+          "brand": "meepShop 網路開店平台",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/012/default/f791282868ef61e6857f75933871ac67a1f39fc3.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/022/medium/461b5562387dfddac4cf30b555fd4c491d60b1b5.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/022/medium/461b5562387dfddac4cf30b555fd4c491d60b1b5.png",
+          "canThirdPartyUrl": false,
+          "enName": "meepShop"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 39414,
+        "name": "[遠端工作/WFH] 電子商務 - 開店成長顧問｜業務人員【電商平台meepShop】優於市場 挑戰百萬年薪",
+        "path": "/companies/meepShop/jobs/39414",
+        "salary": "NT$ 700,000 - 1,400,000 (年薪)",
+        "lastActiveAt": "一個月內更新",
+        "location": "新北市",
+        "companyId": 12,
+        "tags": [],
+        "company": {
+          "id": 12,
+          "path": "/companies/meepShop",
+          "brand": "meepShop 網路開店平台",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/012/default/f791282868ef61e6857f75933871ac67a1f39fc3.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/022/medium/461b5562387dfddac4cf30b555fd4c491d60b1b5.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/022/medium/461b5562387dfddac4cf30b555fd4c491d60b1b5.png",
+          "canThirdPartyUrl": false,
+          "enName": "meepShop"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48246,
+        "name": "資深用戶成長與合作營運專員（Senior Audience Producer）",
+        "path": "/companies/theinitium/jobs/48246",
+        "salary": "NT$ 450,000 -  (月薪)",
+        "lastActiveAt": "一個月內更新",
+        "location": "臺北市",
+        "companyId": 1477,
+        "tags": [],
+        "company": {
+          "id": 1477,
+          "path": "/companies/theinitium",
+          "brand": "端傳媒",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/477/default/549c72c8f99fdae36d4b7b354195ef6970547128.jpg",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/616/medium/41200480c3cc9027dc303e2da56875e516b9b89f.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/616/medium/41200480c3cc9027dc303e2da56875e516b9b89f.png",
+          "canThirdPartyUrl": false,
+          "enName": "theinitium"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48236,
+        "name": "用戶成長與會員營運專員（Audience Producer）",
+        "path": "/companies/theinitium/jobs/48236",
+        "salary": "NT$ 40,000 - 60,000 (月薪)",
+        "lastActiveAt": "一個月內更新",
+        "location": "臺北市",
+        "companyId": 1477,
+        "tags": [
+          "Audience Producer"
+        ],
+        "company": {
+          "id": 1477,
+          "path": "/companies/theinitium",
+          "brand": "端傳媒",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/001/477/default/549c72c8f99fdae36d4b7b354195ef6970547128.jpg",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/001/616/medium/41200480c3cc9027dc303e2da56875e516b9b89f.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/001/616/medium/41200480c3cc9027dc303e2da56875e516b9b89f.png",
+          "canThirdPartyUrl": false,
+          "enName": "theinitium"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 48219,
+        "name": "Founding ML Engineer | 資深機器學習工程師",
+        "path": "/companies/aenea/jobs/48219",
+        "salary": "面議（經常性薪資達4萬元）",
+        "lastActiveAt": "一個月內更新",
+        "location": "臺北市",
+        "companyId": 3532,
+        "tags": [
+          "AI",
+          "MachineLearning",
+          "ComputerVision"
+        ],
+        "company": {
+          "id": 3532,
+          "path": "/companies/aenea",
+          "brand": "岸雷科技股份有限公司",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/003/532/default/23e6a04e98cc6ef83caa5b7568deb30ed04a8c2e.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/002/805/medium/4bd51b79e3a2c7f80cd1db580e7de938080db9ab.png",
+          "badges": [
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/002/805/medium/4bd51b79e3a2c7f80cd1db580e7de938080db9ab.png",
+          "canThirdPartyUrl": false,
+          "enName": "aenea"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      },
+      {
+        "id": 4202,
+        "name": "Frontend Engineer 前端工程師（Vue）",
+        "path": "/companies/OakMega/jobs/4202",
+        "salary": "NT$ 50,000 - 100,000 (月薪)",
+        "lastActiveAt": "一個月內更新",
+        "location": "臺北市",
+        "companyId": 158,
+        "tags": [
+          "Vue.js",
+          "frontend",
+          "Frontend Engineer"
+        ],
+        "company": {
+          "id": 158,
+          "path": "/companies/OakMega",
+          "brand": "OakMega 大橡科技",
+          "logo": "https://s3cdn.yourator.co/companies/logos/000/000/158/default/caa346a5a17c50afc825e0f83c27eb5222b48fd1.png",
+          "banner": "https://s3cdn.yourator.co/banners/banners/000/000/202/medium/15f81e44755cba68d9dedbfec41bdf43593127ae.png",
+          "badges": [
+            "aama",
+            "verified"
+          ],
+          "bannerUrl": "https://s3cdn.yourator.co/banners/banners/000/000/202/medium/15f81e44755cba68d9dedbfec41bdf43593127ae.png",
+          "canThirdPartyUrl": true,
+          "enName": "OakMega"
+        },
+        "thirdPartyUrl": null,
+        "follow": false,
+        "externalSource": null
+      }
+    ]
+  }
+}
