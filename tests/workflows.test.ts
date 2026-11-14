@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -35,5 +36,13 @@ describe("GitHub Actions workflows", () => {
     expect(content).toContain("git log");
     expect(content).toContain("gh release");
     expect(content).not.toContain("npm publish");
+  });
+
+  it("tracks dist/server.js as executable (100755) in git index for Linux CI", () => {
+    const staged = execFileSync("git", ["ls-files", "--stage", "dist/server.js"], {
+      cwd: ROOT,
+      encoding: "utf-8",
+    });
+    expect(staged.startsWith("100755 ")).toBe(true);
   });
 });
