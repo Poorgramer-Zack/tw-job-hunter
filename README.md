@@ -25,20 +25,37 @@
 
 ## 安裝
 
-需要 Node.js 20 以上（裝了 Claude Code 就有）。plugin 直接執行打包好的 `dist/server.js`，不用安裝依賴，也不用建置。
+需要 Node.js 20 以上。plugin 會直接執行內附的 `dist/server.js`，不用安裝依賴或手動建置。
 
-**方式一：Claude Code plugin（建議）**
+**方式一：Claude Code plugin（建議，免手動 clone）**
 
 ```
-claude plugin marketplace add /path/to/tw-job-hunter
+claude plugin marketplace add Poorgramer-Zack/tw-job-hunter
 claude plugin install tw-job-hunter@tw-job-hunter
 ```
 
-在 Claude Code 內用 `/plugin` 安裝時，會跳出表單請你填 **Tavily API Key**（選填，見下）。之後要修改：`/plugin configure tw-job-hunter@tw-job-hunter`。在終端機執行 `claude plugin install` 不會跳出表單，需另外執行 `claude plugin configure tw-job-hunter@tw-job-hunter`。
-
-**方式二：直接註冊 MCP server**
+或單行安裝（Claude Code 終端機 v2.1.292+ / session 內 `/plugin install ... --marketplace` v2.1.275+）：
 
 ```
+claude plugin install tw-job-hunter --marketplace Poorgramer-Zack/tw-job-hunter
+```
+
+若自己 clone 下來開發或測試，也可指向本地路徑：
+
+```
+claude plugin marketplace add ./path/to/tw-job-hunter
+claude plugin install tw-job-hunter@tw-job-hunter
+```
+
+在 Claude Code 內用 `/plugin` 安裝時，會跳出表單請你填 **Tavily API Key**（選填，見下）。終端機安裝後，可執行 `claude plugin configure tw-job-hunter@tw-job-hunter` 設定或修改金鑰。
+
+- **更新**：第三方 marketplace 預設不會自動更新，可在 `/plugin` > Marketplaces 手動開啟自動更新。
+- **執行環境**：本機 stdio MCP server 只在 Claude Code（終端機、桌面 App、IDE）執行，不支援 claude.ai 網頁版或 Cowork 雲端 session。
+
+**方式二：直接註冊 MCP server（需先 clone）**
+
+```
+git clone https://github.com/Poorgramer-Zack/tw-job-hunter.git
 claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 ```
 
