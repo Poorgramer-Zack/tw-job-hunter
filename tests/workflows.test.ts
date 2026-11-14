@@ -17,7 +17,7 @@ describe("GitHub Actions workflows", () => {
     expect(content).toContain("npm test");
     expect(content).toContain("npm run check:dist");
     expect(content).toContain("npm ci");
-    expect(content).toContain("'20'");
+    expect(content).toContain("'24'");
   });
 
   it("provides .github/workflows/release.yml reusing ci.yml and generating commit changelog without npm publish", () => {

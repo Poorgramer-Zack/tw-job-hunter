@@ -16,6 +16,7 @@ describe("pi extension and package manifest", () => {
     expect(pkg.pi?.extensions).toContain("./dist/pi-extension.js");
     expect(pkg.pi?.skills).toContain("./skills");
     expect(pkg.peerDependencies?.["@earendil-works/pi-coding-agent"]).toBe("*");
+    expect(pkg.peerDependenciesMeta?.["@earendil-works/pi-coding-agent"]?.optional).toBe(true);
 
     const depKeys = Object.keys(pkg.dependencies ?? {});
     for (const key of depKeys) {
