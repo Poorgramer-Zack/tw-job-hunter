@@ -1,7 +1,54 @@
 {
   "name": "tw-job-hunter",
+  "version": "0.5.0",
+  "description": "104 與 Yourator 職缺搜尋、公司研調、PDF 履歷無損解析，以及求職流程、適配度分析、履歷調整建議與自薦信擬定 Skills（研究學習用途，非官方）",
+  "license": "MIT",
+  "author": {
+    "name": "Poorgramer-Zack",
+    "url": "https://github.com/Poorgramer-Zack"
+  },
+  "homepage": "https://github.com/Poorgramer-Zack/tw-job-hunter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poorgramer-Zack/tw-job-hunter.git"
+  },
+  "keywords": [
+    "opencode-plugin",
+    "pi-package",
+    "mcp",
+    "skills",
+    "job-search",
+    "taiwan",
+    "104",
+    "yourator",
+    "resume",
+    "cover-letter"
+  ],
   "private": true,
   "type": "module",
+  "exports": {
+    ".": "./dist/opencode-plugin.js"
+  },
+  "files": [
+    "dist/",
+    "skills/",
+    ".claude-plugin/",
+    ".codex-plugin/",
+    ".antigravity-plugin/",
+    ".agents/plugins/",
+    ".opencode/",
+    "mcp_config.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "pi": {
+    "extensions": [
+      "./dist/pi-extension.js"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
   "engines": {
     "node": ">=20"
   },
@@ -9,6 +56,9 @@
     "build": "tsup",
     "test": "vitest run",
     "check:dist": "npm run build && git diff --exit-code dist/"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2",

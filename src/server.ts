@@ -283,7 +283,7 @@ function toToolResult(data: Record<string, unknown>) {
 export function createServer(): McpServer {
   const server = new McpServer({
     name: "tw-job-hunter",
-    version: "0.4.0",
+    version: "0.5.0",
   });
 
   server.registerTool(

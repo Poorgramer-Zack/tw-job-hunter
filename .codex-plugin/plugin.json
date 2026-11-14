@@ -1,0 +1,40 @@
+{
+  "name": "tw-job-hunter",
+  "version": "0.5.0",
+  "description": "104 與 Yourator 職缺搜尋、公司研調、PDF 履歷無損解析，以及求職流程、適配度分析、履歷調整建議與自薦信擬定 Skills（研究學習用途，非官方）",
+  "author": {
+    "name": "Poorgramer-Zack",
+    "url": "https://github.com/Poorgramer-Zack"
+  },
+  "homepage": "https://github.com/Poorgramer-Zack/tw-job-hunter",
+  "repository": "https://github.com/Poorgramer-Zack/tw-job-hunter",
+  "license": "MIT",
+  "keywords": [
+    "job-search",
+    "taiwan",
+    "104",
+    "yourator",
+    "resume",
+    "cover-letter",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.codex-plugin/mcp.json",
+  "interface": {
+    "displayName": "tw-job-hunter",
+    "shortDescription": "台灣求職助手：104 / Yourator 搜尋、公司研調與履歷自薦信 Skills",
+    "longDescription": "整合 104 人力銀行與 Yourator 職缺搜尋、經濟部與社群公司研調、PDF 履歷無損解析，搭配求職流程引導、適配度分析、履歷優化與自薦信擬定 Skills，協助台灣求職者完成投遞前準備。",
+    "developerName": "Poorgramer-Zack",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://github.com/Poorgramer-Zack/tw-job-hunter",
+    "defaultPrompt": [
+      "幫我找台北的遠端 Python 後端工程師職缺",
+      "解析我的 PDF 履歷並分析與這份 104 職缺的適配度",
+      "幫我查這家公司的登記資訊與網路評價，再擬一封自薦信"
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # tw-job-hunter
 
-讓 Claude 直接搜尋 104 人力銀行與 Yourator 職缺、讀取完整 JD，並查詢公司的登記資料與社群口碑的本機 MCP server。
+搜尋 104 人力銀行與 Yourator 職缺、讀取完整 JD，並查詢公司登記資料與社群口碑的本機工具。同時支援 Claude Code、Codex、Antigravity、OpenCode 與 Pi。
 
 > **研究學習用途、非官方專案、僅限個人使用。** 本專案與這些平台沒有任何關係，使用的是它們前端自己呼叫、但未公開文件化的端點；所有相關網站內容與服務條款之法律解釋權均歸 104、Yourator 等各平台方所有，使用前請詳閱各平台之服務條款。請保持低頻、不要大量抓取、不要商業使用，並自行承擔風險。詳見下方〈條款與風險〉。
 
@@ -64,6 +64,46 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 安裝後在 Claude 中問「幫我找台北的後端遠端職缺」或「幫我查台灣積體電路製造的口碑」即可。
 
 > plugin 的 MCP server 設定異動在**下一個 session** 才會生效；`/reload-plugins` 不會重啟已在執行的 server。
+
+### 其他平台
+
+- **Codex（Codex CLI / Desktop）**：
+
+  ```
+  codex plugin marketplace add Poorgramer-Zack/tw-job-hunter
+  codex plugin add tw-job-hunter@tw-job-hunter
+  ```
+
+  若要使用 Dcard／PTT 摘要，請在環境變數設定 `TAVILY_API_KEY`（選填）。
+
+- **Google Antigravity（`agy`）**：
+
+  可從本地或 clone 後的目錄安裝，或直接由 Claude Code 匯入：
+
+  ```
+  git clone https://github.com/Poorgramer-Zack/tw-job-hunter.git
+  agy plugin install ./tw-job-hunter
+  ```
+
+  若已裝過 Claude Code 版，也可執行 `agy plugin import claude`。選填 `TAVILY_API_KEY` 可透過環境變數或 `~/.gemini/config/mcp_config.json` 設定。
+
+- **OpenCode（支援 v2 主線與 v1 1.18.29+）**：
+
+  透過 plugin 安裝（同時掛載 MCP server 與 4 個 Skills）：
+
+  ```
+  opencode plugin add github:Poorgramer-Zack/tw-job-hunter
+  ```
+
+  如果是更舊的 OpenCode v1（`<1.18.29`），請在 `opencode.json` 的 `mcp` 區塊手動設定 `"type": "local"`、`command: ["node", "/path/to/tw-job-hunter/dist/server.js"]`。`TAVILY_API_KEY` 請在環境變數或設定檔的 `environment` 中提供。
+
+- **Pi**：
+
+  ```
+  pi install git:github.com/Poorgramer-Zack/tw-job-hunter
+  ```
+
+  會自動掛載 `dist/pi-extension.js` 與 `skills/`。選填 `TAVILY_API_KEY` 透過環境變數提供。
 
 ### Tavily API Key（選填）
 
@@ -217,6 +257,8 @@ Cloudflare 會看 TLS 指紋：舊版用 Python 時，`httpx` 與 `curl_cffi`（
 ```
 src/
   server.ts          # MCP server：註冊 6 個工具，錯誤轉成結構化結果
+  opencode-plugin.ts # OpenCode v2 + v1 雙入口 plugin
+  pi-extension.ts    # Pi extension 入口
   job104/            # 104：client（節流、被擋偵測）、codes（地區/職類代碼）、search、detail
   yourator/          # Yourator：codes（地區/職類代碼）、search、detail（共用 company/http.ts 節流）
   company/           # 公司研調：research 是入口，各來源一個模組
@@ -234,11 +276,19 @@ skills/              # 獨立 Skills
   cover-letter/      #   自薦信擬定 Skill
 tests/               # vitest 測試（fixtures/ 為錄製並去識別化的回應）
 scripts/             # 一次性腳本：錄製 fixture
-dist/                # 建置產物 server.js，要隨程式碼一起 commit
-.claude-plugin/      # plugin 與本機 marketplace 設定
+dist/                # 建置產物（server.js、opencode-plugin.js、pi-extension.js），要隨程式碼一起 commit
+.claude-plugin/      # Claude Code plugin 與本機 marketplace 設定
+.codex-plugin/       # Codex plugin 與 MCP 設定
+.antigravity-plugin/ # Google Antigravity plugin 設定
+.agents/plugins/     # Codex marketplace 設定
+  marketplace.json
+mcp_config.json      # Antigravity MCP server 設定
+.opencode/plugins/   # OpenCode 專案自動探索入口（轉匯出 dist/opencode-plugin.js）
 ```
 
 各來源互相獨立、同時查詢；同一來源的請求由 `src/company/http.ts` 的每來源 Promise 串列保證間隔。新增來源只需在 `company/` 加一個模組並在 `research.ts` 註冊。
+
+發佈時由 `package.json` 的 `files` 白名單控制收錄範圍。
 
 ## 開發
 

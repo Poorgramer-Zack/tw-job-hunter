@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "tw-job-hunter": {
+      "command": "node",
+      "args": [
+        "./dist/server.js"
+      ],
+      "cwd": "."
+    }
+  }
+}
