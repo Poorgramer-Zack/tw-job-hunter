@@ -28,6 +28,19 @@ describe("skills integrity", () => {
     expect(content.includes("12 組") || content.includes("Bad")).toBe(true);
   });
 
+  it("test_resume_advisor_supports_two_formats", () => {
+    const content = fs.readFileSync(getSkillPath("resume-advisor"), "utf-8");
+
+    expect(content).toContain("詳細版");
+    expect(content).toContain("精簡版");
+    expect(content).toContain("固定欄位");
+    expect(content).toContain("先問使用者");
+    expect(content).not.toContain("適用於 Cake");
+    expect(content).not.toContain("來源不明");
+    expect(content).not.toContain("外商精簡版");
+    expect(content).not.toContain("104 詳細版");
+  });
+
   it("test_cover_letter_skill_file_exists_and_valid", () => {
     const skillFile = getSkillPath("cover-letter");
     expect(fs.existsSync(skillFile)).toBe(true);
