@@ -32,8 +32,8 @@ describe("plugin manifest", () => {
     expect(raw.description).toContain("Yourator");
   });
 
-  it("test_manifest_version_is_0_5_2", () => {
+  it("test_manifest_version_is_0_6_0", () => {
     const raw = JSON.parse(fs.readFileSync(MANIFEST, "utf-8"));
-    expect(raw.version).toBe("0.5.2");
+    expect(raw.version).toBe("0.6.0");
   });
 });
