@@ -19,6 +19,13 @@ describe("skills integrity", () => {
     const skillFile = getSkillPath("resume-advisor");
     expect(fs.existsSync(skillFile)).toBe(true);
     const content = fs.readFileSync(skillFile, "utf-8");
+    const fm = frontmatterOf(content);
+
+    expect(fm).toMatch(/^name: resume-advisor$/m);
+    expect(fm).toMatch(/^description: .+/m);
+    for (const trigger of ["履歷健診", "履歷修改", "經歷改寫", "STAR"]) {
+      expect(fm).toContain(trigger);
+    }
 
     expect(content).toContain("STAR");
     expect(content.includes("1 頁") || content.includes("一頁")).toBe(true);
@@ -26,6 +33,21 @@ describe("skills integrity", () => {
     expect(content.includes("項目") && content.includes("專案")).toBe(true);
     expect(content.includes("去 AI") || content.includes("AI 腔調")).toBe(true);
     expect(content.includes("12 組") || content.includes("Bad")).toBe(true);
+
+    expect(content).toContain("parse_resume_pdf");
+    expect(content).toContain("job104_job_detail");
+    expect(content).toContain("yourator_job_detail");
+    expect(content).toContain("待補");
+    expect(
+      content.includes("不編造") ||
+        content.includes("不杜撰") ||
+        content.includes("不自行編造"),
+    ).toBe(true);
+    expect(content).toContain("全形標點");
+
+    for (const badTerm of ["對標", "痛點", "成效覆盤", "$\\to$"]) {
+      expect(content).not.toContain(badTerm);
+    }
   });
 
   it("test_resume_advisor_supports_two_formats", () => {
@@ -45,13 +67,41 @@ describe("skills integrity", () => {
     const skillFile = getSkillPath("cover-letter");
     expect(fs.existsSync(skillFile)).toBe(true);
     const content = fs.readFileSync(skillFile, "utf-8");
+    const fm = frontmatterOf(content);
 
-    expect(content).toContain("300");
+    expect(fm).toMatch(/^name: cover-letter$/m);
+    expect(fm).toMatch(/^description: .+/m);
+    for (const trigger of ["自薦信", "求職信", "應徵信", "給公司的話", "cover letter"]) {
+      expect(fm).toContain(trigger);
+    }
+
+    expect(content).toContain("150");
+    expect(content).toContain("120");
+    expect(content).toContain("180");
+    expect(content).toMatch(/2\s*[至–-]\s*3\s*(?:個)?(?:自然)?短段/);
+    expect(content).not.toContain("300");
+    expect(content).not.toContain("四段");
+
+    expect(content).toContain("parse_resume_pdf");
+    expect(content).toContain("job104_job_detail");
+    expect(content).toContain("yourator_job_detail");
+    expect(content).toContain("待補");
+    expect(content.includes("不編造") || content.includes("不杜撰")).toBe(true);
+
+    expect(content).toContain("JD");
+    expect(content).toContain("貢獻");
+    expect(content.includes("關鍵詞") || content.includes("關鍵字")).toBe(true);
+
     expect(content.includes("嚴禁段落標題") || content.includes("中括號")).toBe(true);
     expect(content.includes("[...]") || content.includes("\\[...\\]")).toBe(true);
     expect(content.includes("禁止自曝弱點") || content.includes("自曝其短")).toBe(true);
     expect(content).toContain("深感榮幸");
-    expect(content).toContain("四段");
+    expect(content).toContain("全形標點");
+    expect(content).toContain("台灣");
+
+    for (const badTerm of ["對標", "痛點", "成效覆盤", "$\\to$"]) {
+      expect(content).not.toContain(badTerm);
+    }
   });
 
   it("test_skills_separation_and_no_cross_contamination", () => {
@@ -78,9 +128,19 @@ describe("job-fit skill", () => {
     const fm = frontmatterOf(fs.readFileSync(file, "utf-8"));
     expect(fm).toMatch(/^name: job-fit$/m);
     expect(fm).toMatch(/^description: .+/m);
-    expect(fm).toContain("這個職缺適合我嗎");
-    expect(fm).toContain("適配度");
-    expect(fm).toContain("履歷對 JD");
+    for (const trigger of [
+      "這個職缺適合我嗎",
+      "適配度",
+      "履歷對 JD",
+      "適不適合",
+      "能不能投",
+      "勝算",
+      "落差",
+      "JD 對照",
+      "fit",
+    ]) {
+      expect(fm).toContain(trigger);
+    }
   });
 
   it("test_job_fit_skill_has_five_sections_and_no_scores", () => {
@@ -90,6 +150,8 @@ describe("job-fit skill", () => {
     }
     expect(content).toContain("未提及");
     expect(content).toContain("推測");
+    expect(content).toContain("門檻");
+    expect(content).toContain("不重複");
     for (const banned of ["分數", "百分比", "錄取率"]) {
       expect(content).toContain(banned);
     }
@@ -98,7 +160,18 @@ describe("job-fit skill", () => {
   it("test_job_fit_skill_documents_resume_and_jd_sources", () => {
     const content = fs.readFileSync(file, "utf-8");
     expect(content).toContain("parse_resume_pdf");
+    expect(content).toContain("job104_job_detail");
+    expect(content).toContain("yourator_job_detail");
     expect(content).toContain("貼上的 JD");
+  });
+
+  it("test_job_fit_skill_is_self_contained_and_prompt_injection_safe", () => {
+    const content = fs.readFileSync(file, "utf-8");
+    expect(content).not.toContain("依 `resume-advisor`");
+    expect(content).toContain("全形標點");
+    expect(content).toContain("台灣");
+    expect(content).toContain("不執行");
+    expect(content.includes("僅視為") || content.includes("純粹視為")).toBe(true);
   });
 });
 
@@ -110,6 +183,9 @@ describe("job-hunt-flow skill", () => {
     const fm = frontmatterOf(fs.readFileSync(file, "utf-8"));
     expect(fm).toMatch(/^name: job-hunt-flow$/m);
     expect(fm).toMatch(/^description: .+/m);
+    for (const trigger of ["找工作", "投遞準備", "求職流程", "查公司", "自薦信"]) {
+      expect(fm).toContain(trigger);
+    }
   });
 
   it("test_job_hunt_flow_skill_covers_seven_stages_and_handoffs", () => {
@@ -122,6 +198,10 @@ describe("job-hunt-flow skill", () => {
     }
     expect(content).toContain("停下來");
     expect(content).toContain("確認");
+    expect(content).toContain("parse_resume_pdf");
+    expect(content).toContain("沿用");
+    expect(content.includes("缺少平台或關鍵字") || content.includes("已提供")).toBe(true);
+    expect(content).not.toContain("先問平台與關鍵字，其餘條件再補");
   });
 
   it("test_job_hunt_flow_separates_104_remote_search", () => {
@@ -158,6 +238,20 @@ describe("skills boundary and privacy", () => {
       const emails = content.match(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g) ?? [];
       for (const email of emails) {
         expect(email.endsWith("@example.com"), `${name}: ${email}`).toBe(true);
+      }
+    }
+  });
+
+  it("test_all_skills_have_single_line_description_and_clean_tw_style", () => {
+    for (const name of SKILL_NAMES) {
+      const content = fs.readFileSync(fileOf(name), "utf-8");
+      const fm = frontmatterOf(content);
+      expect(fm, name).toMatch(new RegExp(`^name: ${name}$`, "m"));
+      const descMatch = fm.match(/^description:\s*(.+)$/m);
+      expect(descMatch, `${name} missing single-line description`).not.toBeNull();
+      expect(descMatch?.[1], `${name} unquoted colon-space in description`).not.toContain(": ");
+      for (const badTerm of ["對標", "痛點", "成效覆盤", "$\\to$"]) {
+        expect(content, `${name} contains ${badTerm}`).not.toContain(badTerm);
       }
     }
   });
