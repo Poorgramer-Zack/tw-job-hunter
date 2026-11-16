@@ -22,6 +22,7 @@ description: 引導使用者從找職缺、篩選、選定、適配度分析、�
 ## 二、交棒規則
 
 - **搜尋** → 依使用者指定的平台，呼叫 `job104_search` 或 `yourator_search`。
+  - 呼叫 `job104_search` 時，遠端與特定地區要**分開搜尋**（104 同時帶 `areas` 與 `remote` 會遺漏大量遠端職缺）：若使用者要找特定地區加上遠端，拆成兩次呼叫（一次只帶 `areas`、一次只帶 `remote` 且不帶 `areas`），再依 `job_code` 合併去重整理；若純粹找遠端職缺，只帶 `remote`、不帶 `areas`。
 - **選定** → 呼叫 `job104_job_detail` 或 `yourator_job_detail`，讀取完整 JD。
 - **適配度** → 交給 `job-fit` Skill。JD 可以來自職缺網址，也可以是使用者貼上的文字。
 - **公司研調** → 呼叫 `company_research`，帶入公司全名：104 職缺用詳情中的公司名稱；Yourator 職缺用詳情中的 `company_legal_name`。

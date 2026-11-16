@@ -61,7 +61,7 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 
 這種方式沒有設定表單，要用 Tavily 請自行設定環境變數 `TAVILY_API_KEY`。
 
-安裝後在 Claude 中問「幫我找台北的後端遠端職缺」或「幫我查台灣積體電路製造的口碑」即可。
+安裝後在 Claude 中問「幫我找台北或遠端的後端職缺」或「幫我查台灣積體電路製造的口碑」即可。
 
 > plugin 的 MCP server 設定異動在**下一個 session** 才會生效；`/reload-plugins` 不會重啟已在執行的 server。
 
@@ -118,7 +118,7 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 | `keyword` | str | 關鍵字（必填） |
 | `page` | int | 頁碼，預設 1 |
 | `areas` | list[str] | 中文地名，可多個，如 `["台北市", "新北市板橋區"]`。「台」「臺」通用；名稱有多個符合時會回錯誤並列出候選 |
-| `remote` | `full` / `partial` / `any` | 完全遠端 / 部分遠端 / 兩者皆可。不填則不篩選 |
+| `remote` | `full` / `partial` / `any` | 完全遠端 / 部分遠端 / 兩者皆可。不填則不篩選。**遠端應分開搜尋**：104 同時帶 `areas` 與 `remote` 會漏掉許多遠端職缺；純找遠端請不帶 `areas`，同時需要地區與遠端請拆兩次呼叫（一次只帶 `areas`、一次只帶 `remote`）再依 `job_code` 去重 |
 | `salary_min` | int | 薪資下限。**設了下限後 104 會排除「待遇面議」的職缺** |
 | `salary_type` | `monthly` / `yearly` | 月薪或年薪，預設月薪 |
 | `job_categories` | list[str] | 中文職類名稱，可多個，如 `["軟體工程師"]` |

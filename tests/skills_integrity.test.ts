@@ -123,6 +123,15 @@ describe("job-hunt-flow skill", () => {
     expect(content).toContain("停下來");
     expect(content).toContain("確認");
   });
+
+  it("test_job_hunt_flow_separates_104_remote_search", () => {
+    const content = fs.readFileSync(file, "utf-8");
+    expect(content).toContain("job104_search");
+    expect(content).toContain("areas");
+    expect(content).toContain("remote");
+    expect(content).toContain("分開搜尋");
+    expect(content).toContain("job_code");
+  });
 });
 
 describe("skills boundary and privacy", () => {

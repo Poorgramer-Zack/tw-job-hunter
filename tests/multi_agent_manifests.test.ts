@@ -20,7 +20,7 @@ describe("codex plugin manifest", () => {
 
     const manifest = JSON.parse(rawText);
     expect(manifest.name).toBe("tw-job-hunter");
-    expect(manifest.version).toBe("0.5.1");
+    expect(manifest.version).toBe("0.5.2");
     expect(manifest.license).toBe("MIT");
     expect(manifest.description).toBeTruthy();
 
@@ -105,7 +105,7 @@ describe("antigravity plugin manifest", () => {
     expect(manifest.$schema).toBe("https://antigravity.google/schemas/v1/plugin.json");
     expect(manifest.name).toBe("tw-job-hunter");
     expect(manifest.displayName).toBeTruthy();
-    expect(manifest.version).toBe("0.5.1");
+    expect(manifest.version).toBe("0.5.2");
     expect(manifest.description).toBeTruthy();
     expect(manifest.logo).toBeUndefined();
   });
@@ -168,7 +168,7 @@ describe("package metadata and cross-platform version consistency", () => {
     }
   });
 
-  it("keeps version 0.5.1 consistent across all manifests and McpServer", () => {
+  it("keeps version 0.5.2 consistent across all manifests and McpServer", () => {
     const pkgVersion = JSON.parse(
       fs.readFileSync(path.join(ROOT, "package.json"), "utf-8"),
     ).version;
@@ -189,10 +189,10 @@ describe("package metadata and cross-platform version consistency", () => {
     expect(match).not.toBeNull();
     const mcpServerVersion = match?.[1];
 
-    expect(pkgVersion).toBe("0.5.1");
-    expect(claudeVersion).toBe("0.5.1");
-    expect(codexVersion).toBe("0.5.1");
-    expect(antigravityVersion).toBe("0.5.1");
-    expect(mcpServerVersion).toBe("0.5.1");
+    expect(pkgVersion).toBe("0.5.2");
+    expect(claudeVersion).toBe("0.5.2");
+    expect(codexVersion).toBe("0.5.2");
+    expect(antigravityVersion).toBe("0.5.2");
+    expect(mcpServerVersion).toBe("0.5.2");
   });
 });

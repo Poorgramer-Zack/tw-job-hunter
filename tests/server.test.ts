@@ -102,6 +102,18 @@ describe("mcp server", () => {
     expect(extractEnums(props.salary_type)).toEqual(["monthly", "yearly"]);
   });
 
+  it("test_job104_search_description_mentions_split_remote_search", async () => {
+    const tools = await listRegisteredTools();
+    const tool = tools.find((t) => t.name === "job104_search");
+    expect(tool).toBeDefined();
+    const d = tool?.description ?? "";
+    expect(d).toContain("areas");
+    expect(d).toContain("remote");
+    expect(d).toContain("分開搜尋");
+    expect(d).toContain("不帶 areas");
+    expect(d).toContain("job_code");
+  });
+
   it("test_company_research_description_mentions_limits", async () => {
     const tools = await listRegisteredTools();
     const tool = tools.find((t) => t.name === "company_research");

@@ -230,7 +230,7 @@ export async function parseResumePdf(
 const JOB104_SEARCH_DESCRIPTION = `搜尋 104 人力銀行職缺，回傳精簡清單（每頁約 20 筆）與分頁資訊。完整 JD 請用 job104_job_detail。
 
 - areas：中文地名，可多個，例如 ["台北市", "新北市板橋區"]。
-- remote：full=完全遠端、partial=部分遠端、any=兩者皆可；不填則不篩選。
+- remote：full=完全遠端、partial=部分遠端、any=兩者皆可；不填則不篩選。注意：104 同時帶 areas 與 remote 會因地區交集漏掉許多遠端職缺，遠端應分開搜尋——純找遠端時不帶 areas；若同時需要特定地區與遠端，請拆成兩次呼叫（一次只帶 areas、一次只帶 remote 且不帶 areas），再依 job_code 合併去重。
 - salary_min + salary_type：薪資下限（月薪或年薪）。注意：設了薪資下限後，104 會排除「待遇面議」的職缺。
 - job_categories：中文職類名稱，可多個，例如 ["軟體工程師"]。
 - job_type：full_time=全職、part_time=兼職。
@@ -283,7 +283,7 @@ function toToolResult(data: Record<string, unknown>) {
 export function createServer(): McpServer {
   const server = new McpServer({
     name: "tw-job-hunter",
-    version: "0.5.1",
+    version: "0.5.2",
   });
 
   server.registerTool(
