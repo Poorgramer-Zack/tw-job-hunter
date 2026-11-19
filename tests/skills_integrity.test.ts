@@ -63,6 +63,36 @@ describe("skills integrity", () => {
     expect(content).not.toContain("104 詳細版");
   });
 
+  it("test_resume_advisor_incorporates_summary_ats_bar_and_skill_balance", () => {
+    const content = fs.readFileSync(getSkillPath("resume-advisor"), "utf-8");
+
+    // 1. 個人簡歷（Summary）五面向與不編造動機
+    expect(content).toContain("個人簡歷");
+    for (const aspect of ["人格特質", "職涯規劃", "能力技術", "產業觀點", "求職動機"]) {
+      expect(content).toContain(aspect);
+    }
+
+    // 2. 技能與職能名稱對齊 JD 原文用語與行話（ATS 篩選）
+    expect(content).toContain("ATS");
+    expect(content).toContain("行話");
+    expect(content.includes("原文用語") || content.includes("JD 原文")).toBe(true);
+
+    // 3. 背景限制條件前置與防浮誇數據原則
+    expect(content).toContain("限制條件");
+    expect(content).toContain("基數");
+
+    // 4. 硬實力為主、軟實力以專案帶出
+    expect(content).toContain("硬實力");
+    expect(content).toContain("軟實力");
+
+    // 7. STAR 為主架構整合 BAR 精簡寫法
+    expect(content).toContain("STAR");
+    expect(content).toContain("BAR");
+    expect(content).toContain("Background");
+    expect(content).toContain("Action");
+    expect(content).toContain("Result");
+  });
+
   it("test_cover_letter_skill_file_exists_and_valid", () => {
     const skillFile = getSkillPath("cover-letter");
     expect(fs.existsSync(skillFile)).toBe(true);
@@ -102,6 +132,50 @@ describe("skills integrity", () => {
     for (const badTerm of ["對標", "痛點", "成效覆盤", "$\\to$"]) {
       expect(content).not.toContain(badTerm);
     }
+  });
+
+  it("test_cover_letter_incorporates_yourator_motivation_anti_patterns_and_valid_example", () => {
+    const content = fs.readFileSync(getSkillPath("cover-letter"), "utf-8");
+
+    // 具體應徵動機、得知管道與不編造公司互動細節
+    expect(content).toContain("應徵動機");
+    expect(content).toContain("得知管道");
+    expect(content).toContain("company_research");
+    expect(content.includes("願景") || content.includes("理念")).toBe(true);
+    expect(content.includes("產品") && content.includes("服務")).toBe(true);
+
+    // Yourator 三大地雷：無關工作瑣事、空洞動機、敷衍／自曝弱點
+    expect(content).toContain("家庭背景");
+    expect(content).toContain("日常興趣");
+    expect(content).toContain("很有興趣");
+
+    // 結尾禮儀：附檔／作品集、聯絡資訊、感謝撥冗閱讀與空間
+    expect(content).toContain("作品集");
+    expect(content).toContain("附檔");
+    expect(content).toContain("撥冗閱讀");
+
+    // 禁止條列編號與生硬模板套話
+    expect(content).toContain("1/");
+    expect(content).toContain("綜合以上");
+    expect(content).toContain("Sincerely");
+
+    // 驗證內附範例本身符合 120–180 字、無標籤與無編號要求
+    const exampleSection = content.split(/^## 五、標準自薦信範例.*$/m)[1] ?? "";
+    const paragraphs = exampleSection
+      .trim()
+      .split(/\r?\n\r?\n/)
+      .filter((p) => p.trim().length > 0);
+    // 最後一段為署名與聯絡資訊
+    expect(paragraphs.length).toBeGreaterThanOrEqual(3);
+    expect(paragraphs.length).toBeLessThanOrEqual(4);
+    const coreParagraphs = paragraphs.slice(0, -1);
+    expect(coreParagraphs.length).toBeGreaterThanOrEqual(2);
+    expect(coreParagraphs.length).toBeLessThanOrEqual(3);
+    const coreText = coreParagraphs.join("");
+    expect(coreText.length).toBeGreaterThanOrEqual(120);
+    expect(coreText.length).toBeLessThanOrEqual(180);
+    expect(coreText).not.toMatch(/[\[【]/);
+    expect(coreText).not.toMatch(/(?:^|\n)\s*(?:1\.|1\/|[-*])/);
   });
 
   it("test_skills_separation_and_no_cross_contamination", () => {
