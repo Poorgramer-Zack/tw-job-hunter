@@ -11,7 +11,7 @@ describe("pi extension and package manifest", () => {
   it("declares pi fields, exports, version, and zero runtime host dependencies in package.json", () => {
     const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf-8"));
 
-    expect(pkg.version).toBe("0.6.0");
+    expect(pkg.version).toBe("0.7.0");
     expect(pkg.exports?.["."]).toBe("./dist/opencode-plugin.js");
     expect(pkg.pi?.extensions).toContain("./dist/pi-extension.js");
     expect(pkg.pi?.skills).toContain("./skills");
