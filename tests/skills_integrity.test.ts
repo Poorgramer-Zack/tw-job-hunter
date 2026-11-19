@@ -91,6 +91,11 @@ describe("skills integrity", () => {
     expect(content).toContain("Background");
     expect(content).toContain("Action");
     expect(content).toContain("Result");
+
+    // 引用自傳 Skill 並移除隱私約束
+    expect(content).toContain("autobiography");
+    expect(content).not.toContain("隱私防護");
+    expect(content).not.toContain("就業服務法");
   });
 
   it("test_cover_letter_skill_file_exists_and_valid", () => {
@@ -183,9 +188,73 @@ describe("skills integrity", () => {
     const letterContent = fs.readFileSync(getSkillPath("cover-letter"), "utf-8");
 
     expect(letterContent).toContain("自薦信");
+    expect(letterContent).toContain("autobiography");
     expect(advisorContent).toContain("履歷調整建議顧問");
+    expect(advisorContent).toContain("autobiography");
     expect(letterContent).toContain("candidate@example.com");
     expect(letterContent).toContain("陳冠宇");
+  });
+});
+
+describe("autobiography skill", () => {
+  const file = path.join(SKILLS_DIR, "autobiography", "SKILL.md");
+
+  it("test_autobiography_skill_file_exists_and_valid", () => {
+    expect(fs.existsSync(file)).toBe(true);
+    const content = fs.readFileSync(file, "utf-8");
+    const fm = frontmatterOf(content);
+
+    expect(fm).toMatch(/^name: autobiography$/m);
+    expect(fm).toMatch(/^description: .+/m);
+    for (const trigger of ["自傳", "求職自傳", "個人故事", "autobiography"]) {
+      expect(fm).toContain(trigger);
+    }
+
+    // 故事本質、背景與性格判讀、互動引導漸進校正流程
+    expect(content).toContain("故事");
+    expect(content).toContain("背景");
+    expect(content).toContain("性格");
+    expect(content).toContain("初稿");
+    expect(content).toContain("提問");
+    expect(content).toContain("引導");
+    expect(content).toContain("校正");
+    expect(content).toContain("定稿");
+    expect(content.includes("復述") || content.includes("重抄")).toBe(true);
+
+    // 雙篇幅規範與 Yourator #239 重點
+    expect(content).toContain("短篇");
+    expect(content).toContain("長篇");
+    expect(content).toContain("300");
+    expect(content).toContain("800");
+    expect(content).toContain("小標題");
+    expect(content).toContain("ATS");
+
+    // 素材取得、防注入、不編造、邊界與台灣在地規範
+    expect(content).toContain("parse_resume_pdf");
+    expect(content).toContain("job104_job_detail");
+    expect(content).toContain("yourator_job_detail");
+    expect(content).toContain("不執行");
+    expect(content.includes("僅視為") || content.includes("純粹視為")).toBe(true);
+    expect(content.includes("不編造") || content.includes("不杜撰")).toBe(true);
+    expect(content).toContain("resume-advisor");
+    expect(content).toContain("cover-letter");
+    expect(content).toContain("全形標點");
+    expect(content).toContain("台灣");
+    expect(content.includes("去 AI") || content.includes("AI 腔調")).toBe(true);
+  });
+
+  it("test_autobiography_examples_respect_short_300_and_long_800_limits", () => {
+    const content = fs.readFileSync(file, "utf-8");
+    const shortSection = content.split(/^### 短篇範例.*$/m)[1]?.split(/^### 長篇範例.*$/m)[0] ?? "";
+    const longSection = content.split(/^### 長篇範例.*$/m)[1] ?? "";
+
+    const shortText = shortSection.trim().replace(/\s+/g, "");
+    const longText = longSection.trim().replace(/\s+/g, "");
+
+    expect(shortText.length).toBeGreaterThanOrEqual(120);
+    expect(shortText.length).toBeLessThanOrEqual(300);
+    expect(longText.length).toBeGreaterThan(300);
+    expect(longText.length).toBeLessThanOrEqual(800);
   });
 });
 
@@ -262,12 +331,27 @@ describe("job-hunt-flow skill", () => {
     }
   });
 
-  it("test_job_hunt_flow_skill_covers_seven_stages_and_handoffs", () => {
+  it("test_job_hunt_flow_skill_covers_eight_stages_and_handoffs", () => {
     const content = fs.readFileSync(file, "utf-8");
-    for (const stage of ["搜尋", "篩選", "選定", "適配度", "公司研調", "履歷調整", "自薦信"]) {
+    for (const stage of [
+      "搜尋",
+      "篩選",
+      "選定",
+      "適配度",
+      "公司研調",
+      "履歷調整",
+      "自傳",
+      "自薦信",
+    ]) {
       expect(content).toContain(stage);
     }
-    for (const target of ["job-fit", "company_research", "resume-advisor", "cover-letter"]) {
+    for (const target of [
+      "job-fit",
+      "company_research",
+      "resume-advisor",
+      "autobiography",
+      "cover-letter",
+    ]) {
       expect(content).toContain(target);
     }
     expect(content).toContain("停下來");
@@ -289,7 +373,13 @@ describe("job-hunt-flow skill", () => {
 });
 
 describe("skills boundary and privacy", () => {
-  const SKILL_NAMES = ["job-fit", "job-hunt-flow", "resume-advisor", "cover-letter"];
+  const SKILL_NAMES = [
+    "job-fit",
+    "job-hunt-flow",
+    "resume-advisor",
+    "cover-letter",
+    "autobiography",
+  ];
   const fileOf = (name: string) => path.join(SKILLS_DIR, name, "SKILL.md");
 
   it("test_job_fit_and_flow_exclude_star_and_word_count_rules", () => {

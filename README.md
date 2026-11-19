@@ -15,8 +15,9 @@
 | `company_research` (MCP) | 公司研調：經濟部登記資料 + GoodJob / 天眼通 / 面試趣口碑，只給事實不給評分 |
 | `parse_resume_pdf` (MCP) | 本機 PDF 履歷無損解析：高保真提取文字、分頁與章節結構，支援中文字元修復 |
 | `job-fit` (Skill) | 比對履歷與 JD（104／Yourator 網址，或任何平台貼上的 JD 文字），列出硬性條件、契合點、缺口與推測事項；不輸出分數 |
-| `job-hunt-flow` (Skill) | 串起搜尋、篩選、選定、適配度、公司研調、履歷調整與自薦信，每步交棒並在需要決定時停下來 |
+| `job-hunt-flow` (Skill) | 串起搜尋、篩選、選定、適配度、公司研調、履歷調整、自傳撰寫與自薦信，每步交棒並在需要決定時停下來 |
 | `resume-advisor` (Skill) | 履歷調整建議：詳細／精簡版型、個人簡歷五面向、STAR／BAR 量化改寫（限制條件前置、防浮誇基數、缺數字標註待補）、JD 原文關鍵字對齊與台灣用語 |
+| `autobiography` (Skill) | 求職自傳引導：依履歷判讀背景與性格、以故事脈絡取代條列復述，分短篇（300 字以下）與長篇（800 字以下），初稿後提問逐步校正 |
 | `cover-letter` (Skill) | 自薦信擬定：150 字上下 2–3 短段自然書信，結合具體動機與 JD 實績、台灣用語、無 `[...]` 標題且避開三大地雷 |
 
 不做：登入、投遞、收藏、應徵者分析。所有請求都不登入、不帶 cookie。
@@ -89,7 +90,7 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 
 - **OpenCode（支援 v2 主線與 v1 1.18.29+）**：
 
-  透過 plugin 安裝（同時掛載 MCP server 與 4 個 Skills）：
+  透過 plugin 安裝（同時掛載 MCP server 與 5 個 Skills）：
 
   ```
   opencode plugin add github:Poorgramer-Zack/tw-job-hunter
@@ -194,13 +195,18 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 ## 獨立 Skills
 
 ### `/resume-advisor` (履歷調整建議)
-- 支援讀入本機 PDF（`parse_resume_pdf`）或貼上履歷，並可對照 104／Yourator／貼上 JD；提完整改寫前先問詳細版或精簡版偏好，頁數依相關內容決定、嚴禁進度條與星等評分。
+- 支援讀入本機 PDF（`parse_resume_pdf`）或貼上履歷，並可對照 104／Yourator／貼上 JD；提完整改寫前先問詳細版或精簡版偏好，頁數依相關內容決定、嚴禁進度條與星等評分（需撰寫自傳故事時引導改用 `autobiography` Skill）。
 - **個人簡歷五面向與能力配比**：依「人格特質、職涯規劃、能力技術、產業觀點、求職動機」梳理個人簡歷（不編造動機）；技能與職能對齊目標 JD 原文行話以利 ATS 檢索，並以硬實力為主、軟實力透過專案背景具體帶出。
 - **STAR／BAR 量化改寫**：提供逐條 Before/After 對照，整合 BAR（Background＋Action＋Result）精簡結構，遇資源或時程限制時前置點出背景條件，數據兼顧實際基數與比例，缺少真實指標時標註待補、絕不自行編造數字。
 - 內建台灣繁體在地化、全形標點與去 AI 腔調規則，杜絕「賦能、抓手、視頻、在快速發展的數位時代」等表達。
 
+### `/autobiography` (求職自傳撰寫)
+- **故事導向而非履歷翻版**：從履歷判讀求職者背景脈絡與性格特質，用思考過程、轉折故事與關鍵收穫補充履歷看不出的人格與動機，不重複條列職責與 KPI。
+- **雙篇幅規格**：提供 **短篇（300 字以下）** 與 **長篇（800 字以下，建議含吸睛段落小標題）** 兩種版本，有目標 JD 時自然融入關鍵字以兼顧 HR 掃描與 ATS 篩選。
+- **互動提問逐步校正**：產出背景性格判讀與初稿後，主動提出 3–5 個具體引導問題協助使用者釐清自身經歷與想法，經多輪回饋逐步修訂出個人化定稿；嚴格不編造經歷或童年故事。
+
 ### `/cover-letter` (自薦信擬定)
-- 核心內文控制在 **150 繁體字上下**（2–3 個純自然短段，不用條列也不加標題），15 秒內快速閱畢，自然有禮且不帶 AI 腔。
+- 核心內文控制在 **150 繁體字上下**（2–3 個純自然短段，不用條列也不加標題），15 秒內快速閱畢，自然有禮且不帶 AI 腔；若需要撰寫求職自傳或調整履歷，會分別引導改用 `autobiography` 或 `resume-advisor`。
 - 開頭寫明背景定位與**具體應徵動機**（認同理念、產品方向或任務，不編造個人經歷），中段以 JD 關鍵詞對應真實量化實績與貢獻，結尾提示履歷／作品集附檔並感謝撥冗閱讀；缺實績數據時標記待補，絕不編造。
 - **避開三大地雷與格式地雷**：不寫家庭背景或日常興趣等無關瑣事、不寫空洞動機、不自曝弱點，亦嚴禁 `[動機]`、`【...】`、`1/` 等標籤與編號。
 
@@ -211,9 +217,9 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 - **推測事項獨立一區**：JD 沒寫、但依職務內容可能需要的能力，每項開頭標「推測」，與明文要求分開列。
 
 ### `/job-hunt-flow` (求職流程引導)
-- 串起完整流程：搜尋 → 篩選 → 選定 → 適配度 → 公司研調 → 履歷調整（可選）→ 自薦信。
-- 每一步交棒給對應的工具或 Skill（`job104_search`、`yourator_search`、`company_research`、`parse_resume_pdf`、`job-fit`、`resume-advisor`、`cover-letter`），已提供平台與關鍵字時直接搜尋，並跨階段沿用已解析的履歷、完整 JD 與適配度脈絡。
-- 在**篩選後、適配度完成後、研調後、自薦信前**停下來問使用者，不會自動跑完整條流程。
+- 串起完整流程：搜尋 → 篩選 → 選定 → 適配度 → 公司研調 → 履歷調整（可選）→ 自傳撰寫（可選）→ 自薦信。
+- 每一步交棒給對應的工具或 Skill（`job104_search`、`yourator_search`、`company_research`、`parse_resume_pdf`、`job-fit`、`resume-advisor`、`autobiography`、`cover-letter`），已提供平台與關鍵字時直接搜尋，並跨階段沿用已解析的履歷、完整 JD 與適配度脈絡。
+- 在**篩選後、適配度完成後、研調後、自傳／自薦信前**停下來問使用者，不會自動跑完整條流程。
 - 可從任一階段開始：已給職缺網址就跳到選定，已貼上 JD 就跳到適配度。
 
 ## 錯誤
@@ -274,6 +280,7 @@ skills/              # 獨立 Skills
   job-hunt-flow/     #   求職流程引導 Skill
   job-fit/           #   適配度分析 Skill
   resume-advisor/    #   履歷調整建議 Skill
+  autobiography/     #   求職自傳引導 Skill
   cover-letter/      #   自薦信擬定 Skill
 tests/               # vitest 測試（fixtures/ 為錄製並去識別化的回應）
 scripts/             # 一次性腳本：錄製 fixture
@@ -295,7 +302,7 @@ mcp_config.json      # Antigravity MCP server 設定
 
 ```
 npm install
-npm test                              # vitest，298 個測試
+npm test                              # vitest，334 個測試
 npm run build                         # tsup，打包成單一 dist/server.js
 ./node_modules/.bin/tsc --noEmit      # 型別檢查（Windows PowerShell 用 .\node_modules\.bin\tsc.cmd --noEmit）
 ```

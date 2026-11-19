@@ -16,7 +16,13 @@ const LOCAL_OPENCODE_PLUGIN_PATH = path.resolve(
   "plugins",
   "tw-job-hunter.js",
 );
-const EXPECTED_SKILLS = ["cover-letter", "job-fit", "job-hunt-flow", "resume-advisor"];
+const EXPECTED_SKILLS = [
+  "autobiography",
+  "cover-letter",
+  "job-fit",
+  "job-hunt-flow",
+  "resume-advisor",
+];
 
 function createEditor<T>(initial: Record<string, T> = {}): OpenCodeEditor<T> {
   const store = new Map<string, T>(Object.entries(initial));
@@ -44,7 +50,7 @@ describe("opencode plugin (v2 + v1)", () => {
     expect(plugin.server).toBeTypeOf("function");
   });
 
-  it("registers local MCP server and four skills in v2 setup(ctx)", async () => {
+  it("registers local MCP server and five skills in v2 setup(ctx)", async () => {
     const mcpEditor = createEditor<OpenCodeMcpConfig>();
     const skillEditor = createEditor<{
       id: string;
