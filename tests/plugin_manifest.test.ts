@@ -34,6 +34,6 @@ describe("plugin manifest", () => {
 
   it("test_manifest_version_is_0_9_0", () => {
     const raw = JSON.parse(fs.readFileSync(MANIFEST, "utf-8"));
-    expect(raw.version).toBe("0.9.0");
+    expect(raw.version).toBe("0.9.1");
   });
 });
