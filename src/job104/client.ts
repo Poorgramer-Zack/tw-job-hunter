@@ -4,8 +4,7 @@
  */
 
 export const HEADERS: Record<string, string> = {
-  "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0 Safari/537.36",
+  "User-Agent": "tw-job-hunter/0.1 (personal research)",
   Accept: "application/json, text/plain, */*",
   "Accept-Language": "zh-TW,zh;q=0.9",
 };
@@ -53,7 +52,7 @@ let last: number | null = null;
 let chain: Promise<void> = Promise.resolve();
 
 // 以模組層級 Promise 串列序列化並發呼叫，確保任意兩次請求間隔 >= 1 秒
-function throttle(): Promise<void> {
+export function throttle(): Promise<void> {
   const run = chain.then(async () => {
     if (last !== null) {
       const wait = MIN_INTERVAL_MS - (clock.now() - last);
@@ -66,6 +65,37 @@ function throttle(): Promise<void> {
   // 單次失敗不應阻塞後續排隊請求
   chain = run.catch(() => {});
   return run;
+}
+
+export function parseJsonResponse(
+  status: number,
+  contentType: string,
+  body: string,
+): unknown {
+  const isJson = contentType.toLowerCase().includes("json");
+
+  if (
+    status === 403 ||
+    status === 429 ||
+    (!isJson && (body.includes("challenge-platform") || body.includes("Just a moment")))
+  ) {
+    throw new Blocked104Error(`被 104 阻擋（HTTP ${status}），請稍後再試，不要連續重試`);
+  }
+  if (status === 404) {
+    throw new NotFound104Error("104 回應 404");
+  }
+  if (status >= 500) {
+    throw new Network104Error(`104 伺服器錯誤（HTTP ${status}）`);
+  }
+  if (!isJson) {
+    throw new Schema104Error(`104 回應不是 JSON（HTTP ${status}），回應格式可能已改變`);
+  }
+
+  try {
+    return JSON.parse(body) as unknown;
+  } catch (err) {
+    throw new Schema104Error("104 回應的 JSON 無法解析，格式可能已改變", { cause: err });
+  }
 }
 
 export function _setClockForTest(nextClock?: ThrottleClock): void {
@@ -112,28 +142,5 @@ export async function getJson(
   }
 
   const ct = res.headers.get("content-type") ?? "";
-  const isJson = ct.toLowerCase().includes("json");
-
-  if (
-    res.status === 403 ||
-    res.status === 429 ||
-    (!isJson && (body.includes("challenge-platform") || body.includes("Just a moment")))
-  ) {
-    throw new Blocked104Error(`被 104 阻擋（HTTP ${res.status}），請稍後再試，不要連續重試`);
-  }
-  if (res.status === 404) {
-    throw new NotFound104Error("104 回應 404");
-  }
-  if (res.status >= 500) {
-    throw new Network104Error(`104 伺服器錯誤（HTTP ${res.status}）`);
-  }
-  if (!isJson) {
-    throw new Schema104Error(`104 回應不是 JSON（HTTP ${res.status}），回應格式可能已改變`);
-  }
-
-  try {
-    return JSON.parse(body) as unknown;
-  } catch (err) {
-    throw new Schema104Error("104 回應的 JSON 無法解析，格式可能已改變", { cause: err });
-  }
+  return parseJsonResponse(res.status, ct, body);
 }

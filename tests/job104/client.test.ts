@@ -26,7 +26,9 @@ describe("job104 client", () => {
     expect(calls[0].params).toEqual({ k: "v" });
     const h = calls[0].headers;
     expect(h.Referer).toBe("https://www.104.com.tw/jobs/search/");
-    expect(h["User-Agent"].startsWith("Mozilla/5.0")).toBe(true);
+    expect(h["User-Agent"]).toBe("tw-job-hunter/0.1 (personal research)");
+    expect(h.Accept).toBe("application/json, text/plain, */*");
+    expect(h["Accept-Language"]).toBe("zh-TW,zh;q=0.9");
     expect(calls[0].signal).toBeInstanceOf(AbortSignal);
   });
 

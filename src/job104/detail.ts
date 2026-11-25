@@ -1,8 +1,9 @@
 /**
- * 104 職缺詳情：網址或代碼 -> 完整職缺內容。
+ * 104 職缺詳情：網址或代碼 -> 隱藏瀏覽器攔截 JSON -> 完整職缺內容。
  */
 
-import { NotFound104Error, Schema104Error, getJson } from "./client.js";
+import { fetchJsonViaBrowser } from "./browser.js";
+import { NotFound104Error, Schema104Error } from "./client.js";
 import { REMOTE_TYPE } from "./search.js";
 
 export const DETAIL_URL = "https://www.104.com.tw/job/ajax/content/{code}";
@@ -132,12 +133,23 @@ export function normalize(payload: unknown, code: string): JobDetailOpen {
   };
 }
 
+export function isJobContentApiUrl(responseUrl: string, jobId: string): boolean {
+  if (!responseUrl || !jobId) return false;
+  const escaped = jobId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?:/job/ajax/content/|/api/jobs/)${escaped}(?:[/?#]|$)`, "i").test(
+    responseUrl,
+  );
+}
+
 export async function detail(job: string): Promise<JobDetailResult> {
   const code = parseJobCode(job);
-  const url = DETAIL_URL.replace("{code}", code);
-  const referer = JOB_PAGE.replace("{code}", code);
+  const jobUrl = JOB_PAGE.replace("{code}", code);
   try {
-    const payload = await getJson(url, undefined, referer);
+    const payload = await fetchJsonViaBrowser(
+      jobUrl,
+      (respUrl) => isJobContentApiUrl(respUrl, code),
+      { timeoutMessage: "104 職缺詳情 API 回應逾時" },
+    );
     return normalize(payload, code);
   } catch (err) {
     if (err instanceof NotFound104Error) {

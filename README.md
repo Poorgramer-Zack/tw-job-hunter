@@ -2,7 +2,7 @@
 
 搜尋 104 人力銀行與 Yourator 職缺、讀取完整 JD，並查詢公司登記資料與社群口碑的本機工具。同時支援 Claude Code、Codex、Antigravity、OpenCode 與 Pi。
 
-> **研究學習用途、非官方專案、僅限個人使用。** 本專案與這些平台沒有任何關係，使用的是它們前端自己呼叫、但未公開文件化的端點；所有相關網站內容與服務條款之法律解釋權均歸 104、Yourator 等各平台方所有，使用前請詳閱各平台之服務條款。請保持低頻、不要大量抓取、不要商業使用，並自行承擔風險。詳見下方〈條款與風險〉。
+> **研究學習用途、非官方專案、僅限個人使用。** 本專案與這些平台沒有任何關係，104 搜尋與詳情透過 Playwright 隱藏瀏覽器載入真實網頁並攔截前端回應，其餘來源使用其前端呼叫的端點；所有相關網站內容與服務條款之法律解釋權均歸 104、Yourator 等各平台方所有，使用前請詳閱各平台之服務條款。請保持低頻、不要大量抓取、不要商業使用，並自行承擔風險。詳見下方〈條款與風險〉。
 
 ## 功能
 
@@ -26,7 +26,7 @@
 
 ## 安裝
 
-需要 Node.js 20 以上。plugin 會直接執行內附的 `dist/server.js`，不用安裝依賴或手動建置。
+需要 Node.js 20 以上。plugin 會直接執行內附的 `dist/server.js`，但因為 104 搜尋與詳情已改用 Playwright 隱藏瀏覽器（為 external 套件，未打包進單一 JS），請確保目錄內已執行 `npm install` 安裝依賴，且系統已安裝 Google Chrome（若無 Chrome，請執行 `npx playwright install chromium`）。
 
 **方式一：Claude Code plugin（建議，免手動 clone）**
 
@@ -255,18 +255,16 @@ claude mcp add tw-job-hunter -- node /path/to/tw-job-hunter/dist/server.js
 
 ## 關於端點
 
-這些端點隨時可能改變。2026-11-13 實測 Node 內建 `fetch` 可以取得 104 搜尋、詳情與代碼表。
-
-Cloudflare 會看 TLS 指紋：舊版用 Python 時，`httpx` 與 `curl_cffi`（模擬 Chrome 指紋）都被擋，只有 `requests` 能過。transport 目前集中在 `src/job104/client.ts`；若日後 `fetch` 也被擋，只需換掉這個檔案（例如用 Playwright 攔截頁面請求），parser 與工具不用動。
+這些端點隨時可能改變。2026-11-24 起，104 搜尋與職缺詳情已改用 Playwright 隱藏瀏覽器（`src/job104/browser.ts`），在背景載入真實 104 網頁並攔截前端觸發的 JSON 回應，取代直接呼叫未公開 API（`Area.json`、`JobCat.json` 公開靜態代碼表仍由 `src/job104/codes.ts` 透過 `fetch` 讀取），並在 MCP 結束時自動關閉瀏覽器。
 
 ## 專案結構
 
 ```
 src/
-  server.ts          # MCP server：註冊 6 個工具，錯誤轉成結構化結果
+  server.ts          # MCP server：註冊 6 個工具與優雅關閉瀏覽器，錯誤轉成結構化結果
   opencode-plugin.ts # OpenCode v2 + v1 雙入口 plugin
   pi-extension.ts    # Pi extension 入口
-  job104/            # 104：client（節流、被擋偵測）、codes（地區/職類代碼）、search、detail
+  job104/            # 104：browser（Playwright 隱藏瀏覽器攔截）、client（節流、代碼表與錯誤分類）、codes（地區/職類代碼）、search、detail
   yourator/          # Yourator：codes（地區/職類代碼）、search、detail（共用 company/http.ts 節流）
   company/           # 公司研調：research 是入口，各來源一個模組
     http.ts          #   共用 HTTP 層（逾時、錯誤分類、每來源 2 秒間隔）與 graphql helper
@@ -302,7 +300,7 @@ mcp_config.json      # Antigravity MCP server 設定
 
 ```
 npm install
-npm test                              # vitest，334 個測試
+npm test                              # vitest，350 個測試
 npm run build                         # tsup，打包成單一 dist/server.js
 ./node_modules/.bin/tsc --noEmit      # 型別檢查（Windows PowerShell 用 .\node_modules\.bin\tsc.cmd --noEmit）
 ```

@@ -13,7 +13,7 @@ import {
   youratorJobDetail,
   youratorSearch,
 } from "../src/server.js";
-import { fakeResponse, installFakeFetch, loadFixture, resetJob104State } from "./job104/helpers.js";
+import { installFakeBrowser, installOfflineCodes, loadFixture, resetJob104State } from "./job104/helpers.js";
 import { FakeHTTP, FakeResponse as YouratorFakeResponse, loadYouratorFixture, loadYouratorJson, resetYouratorState } from "./yourator/helpers.js";
 
 describe("mcp server", () => {
@@ -187,7 +187,15 @@ describe("mcp server", () => {
   });
 
   it("test_blocked_returns_structured_error", async () => {
-    installFakeFetch(fakeResponse({ status: 403, body: "<html>" }));
+    installFakeBrowser({
+      onGoto: async (_url, page) => {
+        page.emitResponse({
+          url: "https://www.104.com.tw/job/ajax/content/8u9za",
+          status: 403,
+          body: "<html>",
+        });
+      },
+    });
     const out = (await job104JobDetail({ job: "8u9za" })) as {
       error: { type: string; message: string };
     };
@@ -205,7 +213,15 @@ describe("mcp server", () => {
   });
 
   it("test_search_ok", async () => {
-    installFakeFetch(fakeResponse({ jsonData: loadFixture("search.json") }));
+    installOfflineCodes();
+    installFakeBrowser({
+      onGoto: async (_url, page) => {
+        page.emitResponse({
+          url: "https://www.104.com.tw/jobs/search/api/jobs?keyword=python",
+          jsonData: loadFixture("search.json"),
+        });
+      },
+    });
     const out = (await job104Search({ keyword: "python" })) as Record<string, unknown>;
     expect(out.total).toBe(1001);
     expect("error" in out).toBe(false);
@@ -229,7 +245,15 @@ describe("mcp server", () => {
   });
 
   it("test_mcp_call_tool_returns_structured_content_and_validates_enum", async () => {
-    installFakeFetch(fakeResponse({ jsonData: loadFixture("search.json") }));
+    installOfflineCodes();
+    installFakeBrowser({
+      onGoto: async (_url, page) => {
+        page.emitResponse({
+          url: "https://www.104.com.tw/jobs/search/api/jobs?keyword=python",
+          jsonData: loadFixture("search.json"),
+        });
+      },
+    });
     const server = createServer();
     const client = new Client({ name: "test-client", version: "0.0.1" });
     const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();

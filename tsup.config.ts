@@ -10,8 +10,8 @@ export default defineConfig([
     clean: true,
     splitting: false,
     minify: true, // dist 不需人讀，壓縮可大幅縮小 commit 進 git 的檔案
-    noExternal: [/^(?!kerberos$).*/],
-    external: ["kerberos"],
+    noExternal: [/^(?!(?:kerberos|playwright)$).*/],
+    external: ["kerberos", "playwright"],
     banner: {
       js: `#!/usr/bin/env node
 import { createRequire as __twCreateRequire } from "node:module";

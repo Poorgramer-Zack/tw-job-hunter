@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Schema104Error } from "../../src/job104/client.js";
 import * as detail from "../../src/job104/detail.js";
-import { fakeResponse, installFakeFetch, loadFixture, resetJob104State } from "./helpers.js";
+import { installFakeBrowser, loadFixture, resetJob104State } from "./helpers.js";
 
 beforeEach(() => {
   resetJob104State();
@@ -62,13 +62,23 @@ describe("job104 detail", () => {
     expect(() => detail.normalize({ data: { header: {} } }, "abcd")).toThrow(Schema104Error);
   });
 
+  it("test_is_job_content_api_url", () => {
+    expect(detail.isJobContentApiUrl("https://www.104.com.tw/job/ajax/content/8zf18", "8zf18")).toBe(true);
+    expect(detail.isJobContentApiUrl("https://www.104.com.tw/job/ajax/content/8zf18?r=1", "8zf18")).toBe(true);
+    expect(detail.isJobContentApiUrl("https://www.104.com.tw/api/jobs/8zf18", "8zf18")).toBe(true);
+    expect(detail.isJobContentApiUrl("https://www.104.com.tw/job/ajax/content/8zf18_extra", "8zf18")).toBe(false);
+  });
+
   it("test_closed_job", async () => {
-    installFakeFetch(
-      fakeResponse({
-        status: 404,
-        jsonData: { error: { code: 11201, message: "職務不存在" } },
-      }),
-    );
+    installFakeBrowser({
+      onGoto: async (_url, page) => {
+        page.emitResponse({
+          url: "https://www.104.com.tw/job/ajax/content/zzzzz",
+          status: 404,
+          jsonData: { error: { code: 11201, message: "職務不存在" } },
+        });
+      },
+    });
     await expect(detail.detail("zzzzz")).resolves.toEqual({
       job_code: "zzzzz",
       status: "not_found",
@@ -77,10 +87,16 @@ describe("job104 detail", () => {
   });
 
   it("test_detail_end_to_end", async () => {
-    const calls = installFakeFetch(fakeResponse({ jsonData: loadFixture("detail.json") }));
+    const browserHarness = installFakeBrowser({
+      onGoto: async (_url, page) => {
+        page.emitResponse({
+          url: "https://www.104.com.tw/job/ajax/content/8zf18",
+          jsonData: loadFixture("detail.json"),
+        });
+      },
+    });
     const out = await detail.detail("https://www.104.com.tw/job/8zf18?x=1");
-    expect(calls[0].url).toBe("https://www.104.com.tw/job/ajax/content/8zf18");
-    expect(calls[0].headers.Referer).toBe("https://www.104.com.tw/job/8zf18");
+    expect(browserHarness.gotoUrls).toEqual(["https://www.104.com.tw/job/8zf18"]);
     expect(out.status).toBe("open");
   });
 });

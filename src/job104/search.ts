@@ -1,8 +1,9 @@
 /**
- * 104 職缺搜尋：使用者選項 -> 104 query；104 JSON -> 精簡職缺清單。
+ * 104 職缺搜尋：使用者選項 -> 104 搜尋頁網址；隱藏瀏覽器攔截 JSON -> 精簡職缺清單。
  */
 
-import { Schema104Error, getJson } from "./client.js";
+import { fetchJsonViaBrowser } from "./browser.js";
+import { Schema104Error } from "./client.js";
 import { areaCode, jobcatCode } from "./codes.js";
 
 export const SEARCH_URL = "https://www.104.com.tw/jobs/search/api/jobs";
@@ -155,11 +156,16 @@ export function formatJob(j: Record<string, unknown>): SearchJob {
 }
 
 export function normalize(payload: unknown): SearchResult {
-  const data = isRecord(payload) ? payload.data : null;
+  const rawData = isRecord(payload) ? payload.data : null;
+  const data = Array.isArray(rawData)
+    ? rawData
+    : isRecord(rawData) && Array.isArray(rawData.list)
+      ? rawData.list
+      : null;
   const metadata = isRecord(payload) && isRecord(payload.metadata) ? payload.metadata : null;
   const pag = metadata && isRecord(metadata.pagination) ? metadata.pagination : null;
 
-  if (!Array.isArray(data) || !pag) {
+  if (!data || !pag) {
     throw new Schema104Error("搜尋回應缺少 data 或 metadata.pagination，104 回應格式可能已改變");
   }
 
@@ -171,9 +177,30 @@ export function normalize(payload: unknown): SearchResult {
   };
 }
 
+export function buildSearchPageUrl(params: Record<string, string | number>): string {
+  const url = new URL(SEARCH_PAGE);
+  for (const [k, v] of Object.entries(params)) {
+    if (v !== undefined && v !== null) {
+      url.searchParams.set(k, String(v));
+    }
+  }
+  url.searchParams.set("mode", "s");
+  url.searchParams.set("jobsource", "2018indexpoc");
+  url.searchParams.set("asc", "0");
+  return url.toString();
+}
+
+export function isSearchApiUrl(responseUrl: string): boolean {
+  return responseUrl.includes("/jobs/search/api/jobs") || responseUrl.includes("/jobs/search/list");
+}
+
 export async function search(options: SearchOptions): Promise<SearchResult> {
   const params = await buildParams(options);
-  const out = normalize(await getJson(SEARCH_URL, params, SEARCH_PAGE));
+  const searchUrl = buildSearchPageUrl(params);
+  const payload = await fetchJsonViaBrowser(searchUrl, isSearchApiUrl, {
+    timeoutMessage: "104 搜尋 API 回應逾時",
+  });
+  const out = normalize(payload);
   const remote = options.remote;
   if (remote) {
     // 104 會在結果中塞入不符篩選的廣告職缺，這裡依遠端條件再過濾一次

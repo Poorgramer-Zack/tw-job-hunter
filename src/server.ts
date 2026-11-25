@@ -7,6 +7,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { SourceError } from "./company/http.js";
 import * as research from "./company/research.js";
+import { closeBrowser } from "./job104/browser.js";
 import { Job104Error } from "./job104/client.js";
 import * as detail from "./job104/detail.js";
 import * as search from "./job104/search.js";
@@ -283,7 +284,7 @@ function toToolResult(data: Record<string, unknown>) {
 export function createServer(): McpServer {
   const server = new McpServer({
     name: "tw-job-hunter",
-    version: "0.8.0",
+    version: "0.9.0",
   });
 
   server.registerTool(
@@ -361,8 +362,26 @@ function isMainModule(): boolean {
   }
 }
 
+export function registerGracefulShutdown(cleanupFn: () => Promise<void> = closeBrowser): void {
+  let shuttingDown: Promise<void> | null = null;
+  const shutdown = () => {
+    if (!shuttingDown) {
+      shuttingDown = cleanupFn()
+        .catch(() => {})
+        .finally(() => {
+          process.exit(0);
+        });
+    }
+  };
+  process.once("SIGINT", shutdown);
+  process.once("SIGTERM", shutdown);
+  process.stdin?.once?.("close", shutdown);
+}
+
 if (isMainModule()) {
-  main().catch((err) => {
+  registerGracefulShutdown();
+  main().catch(async (err) => {
+    await closeBrowser().catch(() => {});
     console.error("MCP server fatal error:", err);
     process.exit(1);
   });

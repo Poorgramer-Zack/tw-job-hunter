@@ -1,6 +1,6 @@
 {
   "name": "tw-job-hunter",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "104 與 Yourator 職缺搜尋、公司研調、PDF 履歷無損解析，以及求職流程、適配度分析、履歷調整建議、求職自傳與自薦信擬定 Skills（研究學習用途，非官方）",
   "license": "MIT",
   "author": {
@@ -69,6 +69,7 @@
     "@modelcontextprotocol/sdk": "^1.32.2",
     "@tavily/core": "^1.1.0",
     "node-html-parser": "^9.0.7",
+    "playwright": "^1.65.1",
     "unpdf": "^2.1.0",
     "zod": "^4.6.7"
   },

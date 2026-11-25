@@ -1,7 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Schema104Error } from "../../src/job104/client.js";
 import * as search from "../../src/job104/search.js";
-import { fakeResponse, installOfflineCodes, loadFixture, resetJob104State } from "./helpers.js";
+import {
+  installFakeBrowser,
+  installOfflineCodes,
+  loadFixture,
+  resetJob104State,
+} from "./helpers.js";
 
 beforeEach(() => {
   resetJob104State();
@@ -136,12 +141,32 @@ describe("job104 search", () => {
     expect(() => search.normalize({ items: [] })).toThrow(Schema104Error);
   });
 
+  it("test_build_search_page_url", async () => {
+    const params = await search.buildParams({ keyword: "python", page: 2, areas: ["台北市"] });
+    const pageUrl = new URL(search.buildSearchPageUrl(params));
+    expect(pageUrl.origin + pageUrl.pathname).toBe(search.SEARCH_PAGE);
+    expect(pageUrl.searchParams.get("keyword")).toBe("python");
+    expect(pageUrl.searchParams.get("page")).toBe("2");
+    expect(pageUrl.searchParams.get("area")).toBe("6001001000");
+    expect(pageUrl.searchParams.get("mode")).toBe("s");
+  });
+
   it("test_search_end_to_end", async () => {
     vi.restoreAllMocks();
-    const calls = installOfflineCodes(fakeResponse({ jsonData: loadFixture("search.json") }));
+    installOfflineCodes();
+    const browserHarness = installFakeBrowser({
+      onGoto: async (_url, page) => {
+        page.emitResponse({
+          url: `${search.SEARCH_URL}?keyword=python`,
+          jsonData: loadFixture("search.json"),
+        });
+      },
+    });
     const out = await search.search({ keyword: "python" });
-    expect(calls[0].url).toBe(search.SEARCH_URL);
-    expect(calls[0].headers.Referer).toBe(search.SEARCH_PAGE);
+    expect(browserHarness.gotoUrls).toHaveLength(1);
+    const navigated = new URL(browserHarness.gotoUrls[0]);
+    expect(navigated.origin + navigated.pathname).toBe(search.SEARCH_PAGE);
+    expect(navigated.searchParams.get("keyword")).toBe("python");
     expect(out.total).toBe(1001);
     expect(out.jobs).toHaveLength(22);
   });
@@ -162,11 +187,18 @@ describe("job104 search", () => {
     ["any", ["full", "partial"]],
   ])("test_remote_filter_drops_ads %s", async (remote, expected) => {
     vi.restoreAllMocks();
-    const calls = installOfflineCodes(
-      fakeResponse({ jsonData: payloadWithRemoteTypes(0, 1, 2, 0, 1) }),
-    );
+    installOfflineCodes();
+    const browserHarness = installFakeBrowser({
+      onGoto: async (_url, page) => {
+        page.emitResponse({
+          url: `${search.SEARCH_URL}?keyword=python`,
+          jsonData: payloadWithRemoteTypes(0, 1, 2, 0, 1),
+        });
+      },
+    });
     const out = await search.search({ keyword: "python", remote });
-    expect(calls[0].params.remoteWork).toBe(search.REMOTE[remote]);
+    const navigated = new URL(browserHarness.gotoUrls[0]);
+    expect(navigated.searchParams.get("remoteWork")).toBe(search.REMOTE[remote]);
     expect(out.jobs.length).toBeGreaterThan(0);
     expect(new Set(out.jobs.map((j) => j.remote))).toEqual(new Set(expected));
   });
